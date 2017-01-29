@@ -12,7 +12,7 @@ public class FiboTest {
     Поля:
     Name:               Test a_khmelov (тут ваша фамилия)
     Test kind:          All in package
-    Package:            by.it.a_khmelov (тут ваша фамилия)
+    Package:            by.it.группа.a_khmelov (тут ваша фамилия)
     Search for test:    In whole project
     */
 

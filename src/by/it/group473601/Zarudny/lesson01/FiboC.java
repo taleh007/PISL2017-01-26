@@ -1,4 +1,4 @@
-package by.it.group473601.ivanov.Zarudny.lesson01;
+package by.it.group473601.Zarudny.lesson01;
 
 import java.util.ArrayList;/*
  * Даны целые числа 1<=n<=1E18 и 2<=m<=1E5,

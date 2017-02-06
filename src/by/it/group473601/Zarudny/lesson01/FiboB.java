@@ -1,8 +1,7 @@
-package by.it.group473601.ivanov.Zarudny.lesson01;
+package by.it.group473601.Zarudny.lesson01;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.List;
 
 /*
  * Вам необходимо выполнить способ вычисления чисел Фибоначчи с вспомогательным массивом

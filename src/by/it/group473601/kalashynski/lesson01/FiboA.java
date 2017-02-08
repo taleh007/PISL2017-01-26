@@ -20,19 +20,19 @@ public class FiboA {
         System.out.printf("calc(%d)=%d \n\t time=%d \n\n", n, fibo.calc(n), fibo.time());
 
         //вычисление чисел фибоначчи медленным методом (рекурсией)
-        /*fibo = new FiboA();
+        fibo = new FiboA();
         n = 33;
-        System.out.printf("slowA(%d)=%d \n\t time=%d \n\n", n, fibo.slowA(n), fibo.time());*/
+        System.out.printf("slowA(%d)=%d \n\t time=%d \n\n", n, fibo.slowA(n), fibo.time());
     }
 
 
-    private int calc(int n) {
+    private long calc(int n) {
         //здесь простейший вариант, в котором код совпадает с мат.определением чисел Фибоначчи
         //время O(2^n)
         if (n <= 3) {
             return n > 1 ? 1 : 0;
         } else {
-            int prev = 0, next = 1, temp = 0;
+            long prev = 0, next = 1, temp = 0;
             for(int i=0;i<=n;i++) {
                 temp = next + prev;
                 next = prev;

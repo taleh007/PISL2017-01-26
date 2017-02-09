@@ -62,33 +62,17 @@ public class B_Sheduler {
 	List<Event> result;
 	result = new ArrayList<>();
 	// ваше решение.
-
-	events = filterEvents(events, from, to);
 	
 	Arrays.sort(events);
 
-	int i = 0;
-	// Add a first event
-	result.add(events[i++]);
-	while (i < events.length) {
+	int startNextEvent = from;
+	for(int i=0;i< events.length;i++) {
 	    Event currentEvent = events[i];
-	    if (currentEvent.start >= result.get(result.size() - 1).stop) {
+	    if(currentEvent.start >= startNextEvent && currentEvent.stop<=to){
+		startNextEvent = currentEvent.stop;
 		result.add(currentEvent);
 	    }
-	    i++;
 	}
-
 	return result;
-    }
-
-    Event[] filterEvents(Event[] events, int from, int to) {
-
-	List<Event> filteredEvents = new ArrayList<Event>();
-	for (int i = 0; i < events.length; i++) {
-	    Event event = events[i];
-	    if (event.start >= from && event.stop <= to)
-		filteredEvents.add(event);
-	}
-	return filteredEvents.toArray(new Event[filteredEvents.size()]);
     }
 }

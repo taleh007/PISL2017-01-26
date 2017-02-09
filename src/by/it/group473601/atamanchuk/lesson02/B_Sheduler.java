@@ -28,22 +28,23 @@ public class B_Sheduler {
         @Override
         public int compareTo(Object o) {
             Event event = (Event)o;
-            if(this.stop<event.stop)
-            {
-                return 1;
-            }
-            else if(this.stop>event.stop)
-            {
-                return -1;
-            }
             if(this.start<event.start)
             {
-                return 1;
+                return -1;
             }
             else if(this.start>event.start)
             {
+                return 1;
+            }
+            if(this.stop<event.stop)
+            {
                 return -1;
             }
+            else if(this.stop>event.stop)
+            {
+                return 1;
+            }
+
             return 0;
         }
 
@@ -74,27 +75,17 @@ public class B_Sheduler {
         //начало и конец событий могут совпадать.
         List<Event> result;
         result = new ArrayList<>();
-        Arrays.sort(events);
         //ваше решение.
-        int duration =to;
+        Arrays.sort(events);
+        int duration =from;
         for(int i=0;i<events.length;i++)
         {
-           if(events[i].stop<=duration)
-           {
-               duration=events[i].start;
-               result.add(events[i]);
-
-           }
+            if(events[i].start>=duration&&events[i].stop<=to)
+            {
+                duration=events[i].stop;
+                result.add(events[i]);
+            }
         }
-        Collections.reverse(result);
-        for(int i=0;i<result.size();i++)
-        {
-            System.out.println("!"+result.get(i));
-        }
-
-
-
-
         return result;                        //вернем итог
     }
 }

@@ -29,10 +29,10 @@ public class FiboB {
         BigInteger Fibo[]= new BigInteger[n+1];
         Fibo[0]=BigInteger.ZERO;
         Fibo[1]=BigInteger.ONE;
-        for(int i=2; i<n; i++){
+        for(int i=2; i<n+1; i++){
             Fibo[i]=Fibo[i-1].add(Fibo[i-2]);
         }
-        return Fibo[n-1];
+        return Fibo[n];
     }
 
 }

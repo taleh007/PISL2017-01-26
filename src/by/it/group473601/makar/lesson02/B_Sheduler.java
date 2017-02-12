@@ -14,7 +14,7 @@ import java.util.List;
 
 public class B_Sheduler {
     //событие у аудитории(два поля: начало и конец)
-    static class Event {
+    static class Event implements Comparable {
         int start;
         int stop;
 
@@ -28,16 +28,15 @@ public class B_Sheduler {
             return "("+ start +":" + stop + ")";
         }
 
-       /* @Override
-        public int compareTo (Event some_event) {
-            //Event some_event = (Event) some_object;
-            if (this.stop > some_event.stop) {
-                return 1;
-            } else if (this.stop == some_event.stop) {
-                return 0;
-            } else return -1;
+        @Override
+        public int compareTo(Object o) {
+            Event some_event = (Event) o;
+                if (this.stop > some_event.stop) {
+                    return 1;
+                } else if (this.stop == some_event.stop) {
+                    return 0;
+                } else return -1;
         }
-        */
     }
 
     public static void main(String[] args) {
@@ -68,7 +67,7 @@ public class B_Sheduler {
         int next_one=from;
         int i;
         for (i=0;i<events.length;i++){
-            if(events[i].start<next_one){
+            if(events[i].start>=next_one ){
                 if(events[i].stop<=to){
                     next_one=events[i].stop;
                     result.add(events[i]);

@@ -72,14 +72,16 @@ public class C_GreedyKnapsack {
         //кроме того, можете описать свой компаратор в классе Item
         //ваше решение.
         Arrays.sort(items);
+        for (Item item:items) {
+            System.out.println(item);
+        }
         int i;
         for (i=0;i<items.length;i++){
             if (W>=items[i].weight){
                 W=W-items[i].weight;
                 result=result+items[i].cost;
             } else {
-                double thing= W/items[i].weight*items[i].cost;
-                result = result + thing;
+                result += (double) W / items[i].weight * items[i].cost;
                 i=items.length;
             }
         }

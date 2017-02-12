@@ -27,7 +27,7 @@ public class Lesson2Test {
         assertTrue("slowA failed", ok);
     }
 
-    @Test
+   @Test
     public void B_Sheduler() throws Exception {
         B_Sheduler instance = new B_Sheduler();
         B_Sheduler.Event[] events = {new B_Sheduler.Event(0, 3), new B_Sheduler.Event(0, 1), new B_Sheduler.Event(1, 2), new B_Sheduler.Event(3, 5),
@@ -42,10 +42,14 @@ public class Lesson2Test {
         boolean ok=starts.toString().equals("[(0:1), (1:2), (2:3), (3:5), (6:7), (7:9)]");
         assertTrue("B_Sheduler failed", ok);
     }
+
     @Test
     public void C_GreedyKnapsack() throws Exception {
+       // File f=new File(root+"by/it/a_khmelov/lesson02/greedyKnapsack.txt");
+
         String root=System.getProperty("user.dir")+"/src/";
-        File f=new File(root+"by/it/a_khmelov/lesson02/greedyKnapsack.txt");
+        File f=new File(root+"by/it/group473601/makar/lesson02/greedyKnapsack.txt");
+
         double costFinal=new C_GreedyKnapsack().calc(f);
         boolean ok=costFinal==200;
         assertTrue("B_Sheduler failed", ok);

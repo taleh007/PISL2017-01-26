@@ -24,6 +24,7 @@ public class Lesson2Test {
         double[] events=new double[]{1, 1.1, 1.6, 2.2, 2.4, 2.7, 3.9, 8.1, 9.1, 5.5, 3.7};
         List<Double> starts=instance.calcStartTimes(events,1); //рассчитаем моменты старта, с длинной сеанса 1
         boolean ok=starts.toString().equals("[1.0, 2.2, 3.7, 5.5, 8.1]");
+        System.out.print(ok);
         assertTrue("slowA failed", ok);
     }
 
@@ -45,7 +46,7 @@ public class Lesson2Test {
     @Test
     public void C_GreedyKnapsack() throws Exception {
         String root=System.getProperty("user.dir")+"/src/";
-        File f=new File(root+"by/it/a_khmelov/lesson02/greedyKnapsack.txt");
+        File f=new File("D:\\Study\\University\\6 sem\\PISL\\PISL2017-01-26\\src\\by\\it\\group473601\\zaliyev\\lesson02\\greedyKnapsack.txt");
         double costFinal=new C_GreedyKnapsack().calc(f);
         boolean ok=costFinal==200;
         assertTrue("B_Sheduler failed", ok);

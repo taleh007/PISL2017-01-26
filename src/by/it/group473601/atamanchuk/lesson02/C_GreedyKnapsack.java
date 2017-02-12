@@ -77,15 +77,12 @@ public class C_GreedyKnapsack {
         //ваше решение.
 
         int size = 0;
-        for(int i=0;i<items.length;i++)
-        {
-            if(items[i].weight+size<=W)
-            {
+        for(int i=0;i<items.length;i++) {
+            if(items[i].weight+size<=W) {
                 result+=items[i].cost;
                 size+=items[i].weight;
             }
-            else
-            {
+            else {
                 int tmp = W-size;
                 int cost=items[i].cost/items[i].weight;
                 result+=tmp*cost;

@@ -78,10 +78,8 @@ public class B_Sheduler {
         //ваше решение.
         Arrays.sort(events);
         int duration =from;
-        for(int i=0;i<events.length;i++)
-        {
-            if(events[i].start>=duration&&events[i].stop<=to)
-            {
+        for(int i=0;i<events.length;i++) {
+            if(events[i].start>=duration&&events[i].stop<=to) {
                 duration=events[i].stop;
                 result.add(events[i]);
             }

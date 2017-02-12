@@ -30,14 +30,11 @@ public class A_VideoRegistrator {
         Arrays.sort(events);
         result.add(events[0]);
         double tmp = events[0];
-        for(int j=1;j<events.length;j++)
-         {
-             if(tmp+workDuration<events[j])
-              {
+        for(int j=1;j<events.length;j++) {
+             if(tmp+workDuration<events[j]) {
                 result.add(events[j]);
                 tmp=events[j];
              }
-
          }
 
 

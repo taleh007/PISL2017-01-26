@@ -1,6 +1,8 @@
 package by.it.group473601.gorbachik.lesson02;
 
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /*
 даны интервальные события events
@@ -13,7 +15,7 @@ import java.util.List;
 
 public class B_Sheduler {
     //событие у аудитории(два поля: начало и конец)
-    static class Event {
+    static class Event implements Comparable{
         int start;
         int stop;
 
@@ -25,6 +27,18 @@ public class B_Sheduler {
         @Override
         public String toString() {
             return "("+ start +":" + stop + ")";
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            Event eventToCompare = (Event)o;
+            if (this.start > eventToCompare.start || this.stop > eventToCompare.stop) {
+                return 1;
+            }
+            if (this.start < eventToCompare.start || this.stop < eventToCompare.stop) {
+                return -1;
+            }
+            return 0;
         }
     }
 
@@ -47,15 +61,14 @@ public class B_Sheduler {
         //в период [from, int] (включительно).
         //оптимизация проводится по наибольшему числу непересекающихся событий.
         //начало и конец событий могут совпадать.
-        List<Event> result;
-        result = new ArrayList<>();
-        //ваше решение.
+        List<Event> result = new ArrayList<>();
+        Arrays.sort(events);
 
-
-
-
-
-
-        return result;                        //вернем итог
+        for (Event event : events)
+            if (event.start >= from && event.stop <= to) {
+                result.add(event);
+                from = event.stop;
+            }
+        return result;
     }
 }

@@ -40,12 +40,10 @@ public class A_VideoRegistrator {
                                                 //за время до конца работы, увеличивая индекс
         Arrays.sort(events);
         result.add(events[0]);
-        for (i = 1; i < events.length; i++) {
-            if (events[i] > result.get(result.size() - 1) + 1)
-                result.add(events[i]);
+        for (double event : events) {
+            if (event > result.get(result.size() - 1) + 1)
+                result.add(event);
         }
-
-
         return result;                        //вернем итог
     }
 }

@@ -34,7 +34,7 @@ public class FiboC {
         ArrayList<Integer> surplus = new ArrayList<>();
         surplus.add(0);
         surplus.add(1);
-        int period=2, buf;
+        int period=2;
         for (int i=2; i<n; i++) {
             surplus.add((surplus.get(i-1)+surplus.get(i-2))%m);
             if (surplus.get(i-1) == 0 && surplus.get(i) == 1)

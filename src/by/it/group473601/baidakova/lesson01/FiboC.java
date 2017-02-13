@@ -6,6 +6,8 @@ package by.it.group473601.baidakova.lesson01;
  * время расчета должно быть не более 2 секунд
  */
 
+import java.util.ArrayList;
+
 public class FiboC {
 
     private long startTime = System.currentTimeMillis();
@@ -25,7 +27,20 @@ public class FiboC {
         //решение практически невозможно найти интуитивно
         //вам потребуется дополнительный поиск информации
         //см. период Пизано
-        return 0L;
+
+        ArrayList<Long> sequence = new ArrayList<>();
+        sequence.add(0L);
+        sequence.add(1L);
+        for(int i = 2; i < m * 6; i++){
+            sequence.add((sequence.get(i - 1) + sequence.get(i - 2)) % m);
+            if(sequence.get(i) == 1 && sequence.get(i-1) == 0){
+                break;
+            }
+        }
+
+        long period = sequence.size() - 2;
+        int val = (int)(n % period);
+        return sequence.get(val);
     }
 
 

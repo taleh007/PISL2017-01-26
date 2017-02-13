@@ -74,21 +74,14 @@ public class C_GreedyKnapsack {
         Arrays.sort(items);
         for (Item item:items) {
             System.out.println(item);
-        }
-        int i;
-        for (i=0;i<items.length;i++){
-            if (W>=items[i].weight){
-                W=W-items[i].weight;
-                result=result+items[i].cost;
+            if (W>=item.weight){
+                W=W-item.weight;
+                result=result+item.cost;
             } else {
-                result += (double) W / items[i].weight * items[i].cost;
-                i=items.length;
+                result=result + (double) W / item.weight * item.cost;
+                break;
             }
         }
-
-
-
-
         System.out.printf("Удалось собрать рюкзак на сумму %f\n",result);
         return result;
     }

@@ -23,27 +23,27 @@ public class FiboC {
         System.out.printf("fasterC(%d)=%d \n\t time=%d \n\n", n, fibo.fasterC(n, m), fibo.time());
     }
 
-    ArrayList<Long> getPeriod(int m){
-        ArrayList<Long> s = new ArrayList();
-        s.add((long)0);
-        s.add((long)1);
+    ArrayList<Long> getPeriodPizano(int m){
+        ArrayList<Long> balances = new ArrayList();
+        balances.add((long)0);
+        balances.add((long)1);
         for(int i = 2; i < m * 6; i++){
-            s.add((s.get(i - 1) + s.get(i - 2)) % m);
-            if(s.get(i) == 1 && s.get(i-1) == 0){
+            balances.add((balances.get(i - 1) + balances.get(i - 2)) % m);
+            if(balances.get(i) == 1 && balances.get(i-1) == 0){
                 break;
             }
         }
-        return s;
+        return balances;
     }
 
     long fasterC(long n, int m) {
         //решение практически невозможно найти интуитивно
         //вам потребуется дополнительный поиск информации
         //см. период Пизано
-        ArrayList<Long> s = getPeriod(m);
-        long period = s.size() - 2;
+        ArrayList<Long> balances = getPeriodPizano(m);
+        long period = balances.size() - 2;
         int val = (int)(n % period);
-        return s.get(val);
+        return balances.get(val);
     }
 
 

@@ -24,9 +24,8 @@ public class A_VideoRegistrator {
     List<Double> calcStartTimes(double[] events, double workDuration){
         //events - события которые нужно зарегистрировать
         //timeWorkDuration время работы видеокамеры после старта
-        List<Double> result;
-        result = new ArrayList<>();
-        int i;                              //i - это индекс события events[i]
+        List<Double> result = new ArrayList<>();
+        //i - это индекс события events[i]
         //комментарии от проверочного решения сохранены для подсказки, но вы можете их удалить.
                                               //подготовка к жадному поглощению массива событий
                                               //hint: сортировка Arrays.sort обеспечит скорость алгоритма
@@ -40,15 +39,14 @@ public class A_VideoRegistrator {
                                                 //за время до конца работы, увеличивая индекс
 
     Arrays.sort (events);
-    Double some_event=events[0];
-    result.add(some_event);
-    for(i=0;i<events.length;i++) {
-        if(some_event+workDuration<events[i]) {
-            some_event = events[i];
-            result.add(some_event);
+    Double someEvent=events[0];
+    result.add(someEvent);
+    for(double event:events) {
+        if(someEvent+workDuration<event) {
+            someEvent = event;
+            result.add(someEvent);
         }
     }
-
         return result;                        //вернем итог
     }
 }

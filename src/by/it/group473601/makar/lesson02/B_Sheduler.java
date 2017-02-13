@@ -30,10 +30,10 @@ public class B_Sheduler {
 
         @Override
         public int compareTo(Object o) {
-            Event some_event = (Event) o;
-                if (this.stop > some_event.stop) {
+            Event someEvent = (Event) o;
+                if (this.stop > someEvent.stop) {
                     return 1;
-                } else if (this.stop == some_event.stop) {
+                } else if (this.stop == someEvent.stop) {
                     return 0;
                 } else return -1;
         }
@@ -48,7 +48,6 @@ public class B_Sheduler {
                             new Event(4, 5),  new Event(6, 7), new Event(6, 9), new Event(7, 9),
                             new Event(8, 9),  new Event(4, 6), new Event(8, 10), new Event(7, 10)
                           };
-
         List<Event> starts = instance.calcStartTimes(events,0,10);  //рассчитаем оптимальное заполнение аудитории
         System.out.println(starts);                                 //покажем рассчитанный график занятий
     }
@@ -58,26 +57,18 @@ public class B_Sheduler {
         //в период [from, int] (включительно).
         //оптимизация проводится по наибольшему числу непересекающихся событий.
         //начало и конец событий могут совпадать.
-        List<Event> result;
-        result = new ArrayList<>();
+        List<Event> result = new ArrayList<>();
         //ваше решение.
-
-
         Arrays.sort(events);
-        int next_one=from;
-        int i;
-        for (i=0;i<events.length;i++){
-            if(events[i].start>=next_one ){
-                if(events[i].stop<=to){
-                    next_one=events[i].stop;
-                    result.add(events[i]);
+        int nextOne=from;
+        for (Event event:events){
+            if(event.start>=nextOne){
+                if(event.stop<=to){
+                    nextOne=event.stop;
+                    result.add(event);
                 }
             }
         }
-
-
-
-
         return result;                        //вернем итог
     }
 }

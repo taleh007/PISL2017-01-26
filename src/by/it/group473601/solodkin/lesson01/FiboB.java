@@ -29,10 +29,10 @@ public class FiboB {
         ArrayList<BigInteger> fib = new ArrayList<>();
         fib.add(BigInteger.ONE);
         fib.add(BigInteger.ONE);
-        for (int i=2; i<n; i++) {
-            fib.add(fib.get(i-1).add(fib.get(i-2)));
+        for (int i = 2; i < n; i++) {
+            fib.add(fib.get(i - 1).add(fib.get(i - 2)));
         }
-        return fib.get(n-1);
+        return fib.get(n - 1);
     }
 
 }

@@ -38,9 +38,9 @@ public class C_GreedyKnapsack {
 
         @Override
         public int compareTo(Item o) {
-            if ((double)cost/(double)weight > (double)o.cost/(double)o.weight)
+            if ((double)cost / (double)weight > (double)o.cost / (double)o.weight)
                 return -1;
-            if ((double)cost/(double)weight == (double)o.cost/(double)o.weight)
+            if ((double)cost / (double)weight == (double)o.cost / (double)o.weight)
                 return 0;
             return 1;
         }

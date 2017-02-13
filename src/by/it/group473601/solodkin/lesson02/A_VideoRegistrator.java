@@ -41,7 +41,7 @@ public class A_VideoRegistrator {
         Arrays.sort(events);
         result.add(events[0]);
         for (i = 1; i < events.length; i++) {
-            if (events[i] > result.get(result.size()-1) + 1)
+            if (events[i] > result.get(result.size() - 1) + 1)
                 result.add(events[i]);
         }
 

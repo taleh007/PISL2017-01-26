@@ -27,12 +27,13 @@ public class FiboA {
 
 
     private int calc(int n) {
-        int a=1, b=1;
+        int a=1;
+        int b=1;
         for (int i=0; i<n-2; i++) {
-            if (a<b)
-                a+=b;
+            if (a < b)
+                a += b;
             else
-                b+=a;
+                b += a;
         }
         return a > b ? a : b;
     }
@@ -42,7 +43,7 @@ public class FiboA {
         if (n <= 2)
             return BigInteger.ONE;
         else
-            return slowA(n-1).add(slowA(n-2));
+            return slowA(n - 1).add(slowA(n - 2));
     }
 
 

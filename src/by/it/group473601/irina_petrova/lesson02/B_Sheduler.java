@@ -1,6 +1,7 @@
 package by.it.group473601.irina_petrova.lesson02;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /*
 даны интервальные события events
@@ -49,10 +50,31 @@ public class B_Sheduler {
         //начало и конец событий могут совпадать.
         List<Event> result;
         result = new ArrayList<>();
-        //ваше решение.
-
-
-
+        //сортировка выбором
+        for (int i = 0; i < events.length; i++) {
+            int minValueIndex = i;
+            for (int j = i + 1; j < events.length; j++) {
+                if (events[j].stop < events[minValueIndex].stop) {
+                    minValueIndex = j;
+                }
+            }
+            Event temp = events[i];
+            events[i] = events[minValueIndex];
+            events[minValueIndex] = temp;
+        }
+        int i =0;
+        int  my_stop;
+        while (i < events.length ) {
+            my_stop = events[i].stop;
+            result.add(events[i]);
+            while (events[i].start < my_stop){
+                if(i == events.length - 1){
+                    return result;
+                }
+                i++;
+            }
+        }
+        System.out.println(Arrays.toString(events));
 
 
 

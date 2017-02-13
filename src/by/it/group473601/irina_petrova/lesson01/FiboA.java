@@ -26,23 +26,45 @@ public class FiboA {
     }
 
 
+    //здесь простейший вариант, в котором код совпадает с мат.определением чисел Фибоначчи
+    //время O(2^n)
     private int calc(int n) {
-        //здесь простейший вариант, в котором код совпадает с мат.определением чисел Фибоначчи
-        //время O(2^n)
-        return 0;
+
+        int first = 1, second = 1;
+        if(n < 0){
+            System.out.println("Error");
+            n = 0;
+        }
+        switch (n) {
+            case 0: return 0;
+            case 1: return 1;
+            case 2: return 1;
+            default:
+                for (int k = 1; k < n - 1; k++){
+                second = second + first;
+                first = second - first;
+                }
+                return second;
+        }
+
     }
 
 
+    //рекурсия
+    //здесь нужно реализовать вариант без ограничения на размер числа,
+    //в котором код совпадает с мат.определением чисел Фибоначчи
+    //время O(2^n)
     BigInteger slowA(Integer n) {
-        //рекурсия
-        //здесь нужно реализовать вариант без ограничения на размер числа,
-        //в котором код совпадает с мат.определением чисел Фибоначчи
-        //время O(2^n)
-
-        return BigInteger.ZERO;
+        if(n < 0){
+            System.out.println("Error");
+            n = 0;
+        }
+        switch (n) {
+            case 0: return BigInteger.ZERO;
+            case 1: return BigInteger.ONE;
+            case 2: return BigInteger.ONE;
+        }
+        return slowA(n - 1).add(slowA(n - 2));
     }
-
-
-
 }
 

@@ -1,8 +1,6 @@
 package by.it.group473601.atamanchuk.lesson01;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.List;
 
 /*
  * Даны целые числа 1<=n<=1E18 и 2<=m<=1E5,

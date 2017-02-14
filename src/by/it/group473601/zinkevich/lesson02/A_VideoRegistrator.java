@@ -36,8 +36,9 @@ public class A_VideoRegistrator {
             result.add(startVideo);                      //и запомним время старта видеокамеры
             double endVideo = startVideo + workDuration; //вычислим момент окончания работы видеокамеры
             i++;
-            while (i < events.length && events[i] <= endVideo)  //и теперь пропустим все покрываемые события
+            while (i < events.length && events[i] <= endVideo) {  //и теперь пропустим все покрываемые события
                 i++;
+            }
         }
 
         return result;

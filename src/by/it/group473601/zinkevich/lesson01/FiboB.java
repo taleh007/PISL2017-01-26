@@ -29,8 +29,9 @@ public class FiboB {
         BigInteger[] array = new BigInteger[n+1];
         array[0] = BigInteger.ZERO;
         array[1] = BigInteger.ONE;
-        for (int i = 2; i <= n; i++)
-            array[i] = array[i-1].add(array[i-2]);
+        for (int i = 2; i <= n; i++) {
+            array[i] = array[i - 1].add(array[i - 2]);
+        }
         return array[n];
     }
 

@@ -66,10 +66,10 @@ public class B_Sheduler {
 
         Arrays.sort(events);
 
-        for (int i = 0; i < events.length; i++) {
-            if (events[i].start >= from && events[i].stop <= to){
-                result.add(events[i]);
-                from = events[i].stop;
+        for (Event event : events) {
+            if (event.start >= from && event.stop <= to) { // если не пересекается
+                result.add(event);
+                from = event.stop;
             }
         }
 

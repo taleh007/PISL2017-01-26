@@ -1,4 +1,4 @@
-package by.it.group473602.kloster;
+package by.it.group473602.kloster.lesson1;
 
 /*
  * Даны целые числа 1<=n<=1E18 и 2<=m<=1E5,

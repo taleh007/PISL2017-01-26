@@ -40,13 +40,14 @@ public class FiboC {
         for (int i = 2; i < 6 * m; i++){
             arrFibo.add(i, arrFibo.get(i-1) + arrFibo.get(i-2));
             arr.add(i, arrFibo.get(i)%m);
-            if (arr.get(i) == 1 && arr.get(i-1) == 0)
+            if (arr.get(i) == 1 && arr.get(i-1) == 0) {
                 break;
+            }
         }
 
         int period = arr.size()-2;
-        int a = (int)n%period;
-        return arr.get(a);
+        int numberPeriod = (int)n%period;
+        return arr.get(numberPeriod);
 
     }
 

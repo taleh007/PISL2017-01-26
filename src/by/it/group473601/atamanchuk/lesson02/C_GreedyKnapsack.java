@@ -83,10 +83,10 @@ public class C_GreedyKnapsack {
                 size+=items[i].weight;
             }
             else {
-                int tmp = W-size;
+                int emptyWeight = W-size;
                 int cost=items[i].cost/items[i].weight;
-                result+=tmp*cost;
-                size+=tmp;
+                result+=emptyWeight*cost;
+                size+=emptyWeight;
             }
         }
 

@@ -32,14 +32,14 @@ public class FiboA {
 
         int fib1=1;
         int fib2=1;
-        int fib=1;
+        int fibResult=1;
         if(n==0) return 0;
         for(int i=2;i<n;i++) {
-            fib = fib1 + fib2;
+            fibResult = fib1 + fib2;
             fib1 = fib2;
-            fib2 = fib;
+            fib2 = fibResult;
         }
-        return fib;
+        return fibResult;
     }
 
 
@@ -49,7 +49,9 @@ public class FiboA {
         //в котором код совпадает с мат.определением чисел Фибоначчи
         //время O(2^n)
         if(n==0) return BigInteger.ZERO;
-        if (n == 1||n==2) return BigInteger.ONE;
+        if (n == 1||n==2) {
+            return BigInteger.ONE;
+        }
         return slowA(n - 1).add(slowA(n - 2));
     }
 

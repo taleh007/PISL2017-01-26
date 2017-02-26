@@ -28,20 +28,11 @@ public class B_Sheduler {
         @Override
         public int compareTo(Object o) {
             Event event = (Event)o;
-            if(this.start<event.start)
-            {
+
+            if(this.stop<event.stop) {
                 return -1;
             }
-            else if(this.start>event.start)
-            {
-                return 1;
-            }
-            if(this.stop<event.stop)
-            {
-                return -1;
-            }
-            else if(this.stop>event.stop)
-            {
+            else if(this.stop>event.stop) {
                 return 1;
             }
 

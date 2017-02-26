@@ -32,11 +32,11 @@ public class B_Sheduler {
 
         public int compareTo(Event eventToComp)
         {
-            if(eventToComp.stop<this.stop)
+            if(eventToComp.stop<this.stop)//current more than sended
                 return 1;
-            else if(eventToComp.stop>this.stop)
+            else if(eventToComp.stop>this.stop)// current less
                 return -1;
-            return 0;
+            return 0;//current=sended
         }
     }
 

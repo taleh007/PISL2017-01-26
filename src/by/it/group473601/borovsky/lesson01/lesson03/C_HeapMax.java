@@ -44,21 +44,59 @@ public class C_HeapMax {
         private List<Long> heap = new ArrayList<>();
 
         int siftDown(int i) { //просеивание вверх
-
+            while(2*i + 1 < heap.size()){
+                int left = 2*i + 1;
+                int right = 2*i + 2;
+                int j = left;
+                if(right < heap.size() && heap.get(right) < heap.get(left)){
+                    j = right;
+                    if(heap.get(i) <= heap.get(j)){
+                        break;
+                    }
+                    swap(heap.get(i),heap.get(j));
+                    i=j;
+                }
+            }
             return i;
         }
 
         int siftUp(int i) { //просеивание вниз
-
+            while(heap.get(i) < heap.get((i-1)/2)){
+                swap(heap.get(i),heap.get((i-1)/2));
+                i = (i - 1)/2;
+            }
             return i;
         }
 
+        private void swap(long a, long b){
+            long tmp = a;
+            a = b;
+            b = tmp;
+        }
+
         void insert(Long value) { //вставка
+            heap.add(value);
+            int index = heap.lastIndexOf(value);
+            siftUp(index);
         }
 
         Long extractMax() { //извлечение и удаление максимума
             Long result = null;
-
+            long max = heap.get(heap.size() - 1);
+            int searchIndex = heap.size() - 1;
+            for(int i = heap.size() - 2; i >= 0;i--){
+                if(heap.get(i) > max){
+                    max = heap.get(i);
+                    searchIndex = i;
+                }
+            }
+            if(searchIndex * 2 + 1 > heap.size()){
+                heap.remove(searchIndex);
+            }else{
+                swap(max,heap.get(heap.size() - 1));
+                heap.remove(heap.get(heap.size() - 1));
+                siftDown(searchIndex);
+            }
             return result;
         }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -76,7 +114,7 @@ public class C_HeapMax {
             if (s.equalsIgnoreCase("extractMax")) {
                 Long res=heap.extractMax();
                 if (res!=null && res>maxValue) maxValue=res;
-                System.out.println();
+                System.out.println(maxValue);
                 i++;
             }
             if (s.contains(" ")) {

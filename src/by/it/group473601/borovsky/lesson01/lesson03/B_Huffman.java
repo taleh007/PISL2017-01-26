@@ -2,7 +2,9 @@ package by.it.group473601.borovsky.lesson01.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 // Lesson 3. B_Huffman.
 // Восстановите строку по её коду и беспрефиксному коду символов.
@@ -43,17 +45,30 @@ import java.util.Scanner;
 public class B_Huffman {
 
     String decode(File file) throws FileNotFoundException {
-        StringBuilder result=new StringBuilder();
         //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(file);
         Integer count = scanner.nextInt();
         Integer length = scanner.nextInt();
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
+        Map<String, Character> codes = new TreeMap<>();
+        scanner.nextLine();
+        for(int i = 0;i < count;i++){
+            String line = scanner.nextLine();
+            String [] pair = line.split(" ");
+            codes.put(pair[1],pair[0].charAt(0));
+        }
+        String code = scanner.nextLine();
 
-
-
-
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i < length;){
+            String key = "";
+            while(!codes.containsKey(key) && i < length){
+                key+=code.charAt(i);
+                i++;
+            }
+            result.append(codes.get(key));
+        }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         return result.toString(); //01001100100111
     }

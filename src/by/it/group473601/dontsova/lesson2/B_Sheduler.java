@@ -1,4 +1,4 @@
-package by.it.group473601.dontsova.lesson01.lesson2;
+package by.it.group473601.dontsova.lesson2;
 
 import java.util.ArrayList;
 import java.util.Arrays;

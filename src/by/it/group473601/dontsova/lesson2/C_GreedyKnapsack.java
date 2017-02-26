@@ -1,4 +1,4 @@
-package by.it.group473601.dontsova.lesson01.lesson2;
+package by.it.group473601.dontsova.lesson2;
 /*
 Даны
 1) объем рюкзака 4
@@ -99,7 +99,7 @@ public class C_GreedyKnapsack {
     public static void main(String[] args) throws FileNotFoundException {
         long startTime = System.currentTimeMillis();
         String root=System.getProperty("user.dir")+"/src/";
-        File f=new File(root+"by/it/group473601/dontsova/lesson01/lesson2/greedyKnapsack.txt");
+        File f=new File(root+ "by/it/group473601/dontsova/lesson2/greedyKnapsack.txt");
         double costFinal=new C_GreedyKnapsack().calc(f);
         long finishTime = System.currentTimeMillis();
         System.out.printf("Общая стоимость %f (время %d)",costFinal,finishTime - startTime);

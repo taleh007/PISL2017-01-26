@@ -1,4 +1,4 @@
-package by.it.group473601.dontsova.lesson01.lesson2;
+package by.it.group473601.dontsova.lesson2;
 
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class Lesson2Test {
     @Test
     public void C_GreedyKnapsack() throws Exception {
         String root=System.getProperty("user.dir")+"/src/";
-        File f=new File(root+"by/it/group473601/dontsova/lesson01/lesson2/greedyKnapsack.txt");
+        File f=new File(root+ "by/it/group473601/dontsova/lesson2/greedyKnapsack.txt");
         double costFinal=new C_GreedyKnapsack().calc(f);
         boolean ok=costFinal==200;
         assertTrue("B_Sheduler failed", ok);

@@ -1,4 +1,4 @@
-package by.it.group473601.dontsova.lesson01.lesson1;
+package by.it.group473601.dontsova.lesson1;
 
 import java.math.BigInteger;
 

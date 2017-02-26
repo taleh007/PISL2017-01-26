@@ -170,8 +170,7 @@ public class A_Huffman {
         StringBuilder sb = new StringBuilder();
         //.....
 
-       for(int i=0;i<s.length();i++)
-       {
+       for(int i=0;i<s.length();i++) {
            sb.append(codes.get(s.charAt(i)));
        }
 

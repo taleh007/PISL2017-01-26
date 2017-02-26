@@ -1,4 +1,4 @@
-package by.it.group473601.dontsova.lesson01.lesson03;
+package by.it.group473601.dontsova.lesson3;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

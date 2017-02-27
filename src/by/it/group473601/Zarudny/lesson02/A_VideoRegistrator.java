@@ -1,6 +1,7 @@
 package by.it.group473601.Zarudny.lesson02;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /*
 даны события events
@@ -37,9 +38,15 @@ public class A_VideoRegistrator {
                                                 //вычислим момент окончания работы видеокамеры
                                                 //и теперь пропустим все покрываемые события
                                                 //за время до конца работы, увеличивая индекс
-
-
-
+        Arrays.sort(events);
+        Double nextEvent = events[0];
+        result.add(nextEvent);
+        for(double event:events){
+            if(nextEvent+workDuration<event){
+                nextEvent=event;
+                result.add(nextEvent);
+            }
+        }
         return result;                        //вернем итог
     }
 }

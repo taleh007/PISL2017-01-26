@@ -54,13 +54,12 @@ public class B_Sheduler {
     }
 
     List<Event> calcStartTimes(Event[] events, int from, int to) {
-        List<Event> result;
-        result = new ArrayList<>();
+        List<Event> result = new ArrayList<>();
         Arrays.sort(events);
-        int end_of_last = 0;
-        for (Event event: events) {
-            if(end_of_last <= event.start) {
-                end_of_last = event.stop;
+        int endOfLast = 0;
+        for(Event event : events) {
+            if(endOfLast <= event.start) {
+                endOfLast = event.stop;
                 result.add(event);
             }
         }

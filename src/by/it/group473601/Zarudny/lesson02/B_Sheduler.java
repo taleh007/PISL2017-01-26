@@ -14,9 +14,8 @@ import java.util.List;
 
 public class B_Sheduler {
 
-
     //событие у аудитории(два поля: начало и конец)
-    static class Event {
+    static class Event implements Comparable {
         int start;
         int stop;
 
@@ -30,18 +29,16 @@ public class B_Sheduler {
             return "("+ start +":" + stop + ")";
         }
 
-        /*@Override
+        @Override
         public int compareTo(Object o) {
             Event someEvent = (Event) o;
             if(this.stop>someEvent.stop){
                 return 1;
             } else if(this.stop == someEvent.stop){
                 return 0;
-            }else{
-                return -1;
-            }
-        }*/
+            }else {return -1;}
 
+        }
     }
 
 
@@ -69,16 +66,15 @@ public class B_Sheduler {
         result = new ArrayList<>();
         //ваше решение.
         Arrays.sort(events);
-        int nextEvnt = from;
+        int nextEvent = from;
         for(Event event:events){
-            if(event.start>nextEvnt){
+            if(event.start>=nextEvent){
                 if(event.stop<to){
+                    nextEvent=event.stop;
                     result.add(event);
                 }
             }
         }
-
-
 
         return result;                        //вернем итог
     }

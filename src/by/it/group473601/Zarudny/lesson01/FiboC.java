@@ -25,23 +25,23 @@ public class FiboC {
         //решение практически невозможно найти интуитивно
         //вам потребуется дополнительный поиск информации
         //см. период Пизано
-        ArrayList<Long> s = getSequencePeriod(m);
-        long period = s.size() - 2; // находим период Пизано
+        ArrayList<Long> sequence = getSequencePeriod(m);
+        long period = sequence.size() - 2; // находим период Пизано
         int val = (int)(n % period);
-        return s.get(val);
+        return sequence.get(val);
 
     }
     private static ArrayList<Long> getSequencePeriod(int m){
-        ArrayList<Long> s = new ArrayList<>();
-        s.add((long)0);
-        s.add((long)1);
+        ArrayList<Long> sequence = new ArrayList<>();
+        sequence.add((long)0);
+        sequence.add((long)1);
         for(int i = 2; i < m * 6; i++){
-            s.add((s.get(i - 1) + s.get(i - 2)) % m);
-            if(s.get(i) == 1 && s.get(i-1) == 0){
+            sequence.add((sequence.get(i - 1) + sequence.get(i - 2)) % m);
+            if(sequence.get(i) == 1 && sequence.get(i-1) == 0){
                 break;
             }
         }
-        return s;
+        return sequence;
     }
 
 

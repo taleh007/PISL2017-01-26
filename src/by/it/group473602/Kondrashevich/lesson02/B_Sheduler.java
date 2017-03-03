@@ -55,18 +55,17 @@ public class B_Sheduler {
         result = new ArrayList<>();
         //ваше решение.
 
-      Arrays.sort(events, (o1, o2) -> (o1.start-o2.start+o1.stop-o2.stop));
+        Arrays.sort(events, (o1, o2) -> (o1.stop-o2.stop));
 
-        result.add(events[0]);
-        for (int i=from+1;i<to; i++){
-            for (Event el: events
-                    ) {
-                if (el.start==i){
-                    result.add(el);
-                    i=el.stop;
-                }
+        int currentFrom=from;
+        for (Event element:
+                events) {
+            if (element.start>=currentFrom && element.stop<=to){
+                result.add(element);
+                currentFrom=element.stop;
             }
         }
+
         return result;                        //вернем итог
     }
 }

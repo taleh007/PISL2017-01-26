@@ -81,7 +81,6 @@ public class C_HeapMax {
         }
 
         Long extractMax() { //извлечение и удаление максимума
-            Long result = null;
             long max = heap.get(heap.size() - 1);
             int searchIndex = heap.size() - 1;
             for(int i = heap.size() - 2; i >= 0;i--){
@@ -90,6 +89,7 @@ public class C_HeapMax {
                     searchIndex = i;
                 }
             }
+            //System.out.println("Max value : " + max);
             if(searchIndex * 2 + 1 > heap.size()){
                 heap.remove(searchIndex);
             }else{
@@ -97,7 +97,7 @@ public class C_HeapMax {
                 heap.remove(heap.get(heap.size() - 1));
                 siftDown(searchIndex);
             }
-            return result;
+            return max;
         }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
     }
@@ -114,7 +114,6 @@ public class C_HeapMax {
             if (s.equalsIgnoreCase("extractMax")) {
                 Long res=heap.extractMax();
                 if (res!=null && res>maxValue) maxValue=res;
-                System.out.println(maxValue);
                 i++;
             }
             if (s.contains(" ")) {

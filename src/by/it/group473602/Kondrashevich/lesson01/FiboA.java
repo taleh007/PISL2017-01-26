@@ -49,8 +49,7 @@ public class FiboA {
         //в котором код совпадает с мат.определением чисел Фибоначчи
         //время O(2^n)
 
-        BigInteger val;
-        return val = n==0 ? BigInteger.ZERO: (n==1 || n==2) ? BigInteger.ONE: (slowA(n-1).add(slowA(n-2)));
+        return n==0 ? BigInteger.ZERO: (n==1 || n==2) ? BigInteger.ONE: (slowA(n-1).add(slowA(n-2)));
 
     }
 

@@ -2,6 +2,8 @@ package by.it.group473601.zinkevich.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 // Lesson 3. B_Huffman.
@@ -51,8 +53,33 @@ public class B_Huffman {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
 
+        String stringRead = scanner.nextLine();
+        Map<Integer, Character> hashMap = new HashMap<>();
+        for (int i = 0; i < count; i++){
+            stringRead = scanner.nextLine();
+            String[] parts = stringRead.split(": ");
+            hashMap.put(Integer.parseInt(parts[1]), parts[0].charAt(0));
+        }
 
-
+        String stringReadWord = scanner.nextLine();
+        int numberWord = -2, flag = 0;
+        String numberString = "";
+        for (int i = 0; i < stringReadWord.length(); i++) {
+            if (flag == 0){
+                numberString = String.valueOf(stringReadWord.charAt(i));
+            }
+            else {
+                numberString += String.valueOf(stringReadWord.charAt(i));
+            }
+            numberWord = Integer.parseInt(numberString);
+            if (hashMap.containsKey(numberWord)){
+                result.append(hashMap.get(numberWord));
+                flag = 0;
+            }
+            else {
+                flag = 1;
+            }
+        }
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         return result.toString(); //01001100100111

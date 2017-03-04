@@ -123,8 +123,7 @@ public class A_Huffman {
            //1. переберем все символы по очереди и рассчитаем их частоту в Map count
             //для каждого символа добавим 1 если его в карте еще нет или инкремент если есть.
         int i=0;
-        for (i=0;i<s.length();i++)
-        {
+        for (i=0;i<s.length();i++) {
             if(count.containsKey(s.charAt(i))) {
                 count.put(s.charAt(i), count.get(s.charAt(i)) + 1);
             }
@@ -134,7 +133,10 @@ public class A_Huffman {
         }
         //2. перенесем все символы в приоритетную очередь в виде листьев
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
-
+       for (char key:count.keySet()) {
+            LeafNode leafNode = new LeafNode(count.get(key),key);
+            priorityQueue.add(leafNode);
+        }
         //3. вынимая по два узла из очереди (для сборки родителя)
         //и возвращая этого родителя обратно в очередь
         //построим дерево кодирования Хаффмана.

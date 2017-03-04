@@ -14,6 +14,7 @@ package by.it.group473602.Kondrashevich.lesson02;
  */
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class C_GreedyKnapsack {
@@ -37,9 +38,15 @@ public class C_GreedyKnapsack {
         @Override
         public int compareTo(Item o) {
             //тут может быть ваш компаратор
+            double costForOne1 = this.cost/this.weight;
+            double costForOne2 = o.cost/o.weight;
 
-
-            return 0;
+            if(costForOne1 > costForOne2)
+                return -1;
+            if (costForOne1 < costForOne2)
+                return 1;
+            else
+                return 0;
         }
     }
 
@@ -66,7 +73,20 @@ public class C_GreedyKnapsack {
         //кроме того, можете описать свой компаратор в классе Item
         //ваше решение.
 
+        Arrays.sort(items);
 
+        double costForOne;
+        for (int i=0; i<n; i++){
+            if(items[i].weight<W){
+                result+=items[i].cost;
+                W-=items[i].weight;
+            }
+            else {
+                costForOne=items[i].cost/items[i].weight;
+                result+=(costForOne*W);
+                break;
+            }
+        }
 
 
 
@@ -77,7 +97,7 @@ public class C_GreedyKnapsack {
     public static void main(String[] args) throws FileNotFoundException {
         long startTime = System.currentTimeMillis();
         String root=System.getProperty("user.dir")+"/src/";
-        File f=new File(root+"by/it/a_khmelov/lesson02/greedyKnapsack.txt");
+        File f=new File(root+"by/it/group473602/Kondrashevich/lesson02/greedyKnapsack.txt");
         double costFinal=new C_GreedyKnapsack().calc(f);
         long finishTime = System.currentTimeMillis();
         System.out.printf("Общая стоимость %f (время %d)",costFinal,finishTime - startTime);

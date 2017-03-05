@@ -2,6 +2,8 @@ package by.it.group473601.gorbachik.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 // Lesson 3. B_Huffman.
@@ -51,8 +53,24 @@ public class B_Huffman {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
 
+        HashMap<String, String> huffmanKeyMap = new HashMap<>();
+        scanner.nextLine();
 
+        while (scanner.hasNext() && !scanner.hasNextBigInteger()) {
+            String[] fileLine = scanner.nextLine().split(":");
+            huffmanKeyMap.put(fileLine[1].trim(), fileLine[0]);
+        }
 
+        char[] encodedMessage = scanner.nextLine().toCharArray();
+
+        StringBuilder codeKey = new StringBuilder();
+        for (char codeSymbol:encodedMessage) {
+            codeKey.append(codeSymbol);
+            if(huffmanKeyMap.containsKey(codeKey.toString())){
+                result.append(huffmanKeyMap.get(codeKey.toString()));
+                codeKey = new StringBuilder();
+            }
+        }
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         return result.toString(); //01001100100111

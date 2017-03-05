@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 // Lesson 3. C_Heap.
 // Задача: построить max-кучу = пирамиду = бинарное сбалансированное дерево на массиве.
@@ -43,22 +44,49 @@ public class C_HeapMax {
         //Будет мало? Ну тогда можете его собрать как Generic и/или использовать в варианте B
         private List<Long> heap = new ArrayList<>();
 
-        int siftDown(int i) { //просеивание вверх
+        public void swap(int a, int b){
+            long tmp = heap.get(a);
+            heap.set(a, heap.get(b));
+            heap.set(b, tmp);
+        }
 
+        int siftDown(int i) { //просеивание вверх
+            while (2*i + 1<heap.size()) {
+                int left = 2*i + 1;
+                int right = 2*i + 2;
+                int j = left;
+                if (right < heap.size() && heap.get(right) < heap.get(left)) {
+                    j = right;
+                }
+                if (heap.get(i) <= heap.get(j)) {
+                    break;
+                }
+                swap(i, j);
+                i=j;
+            }
             return i;
         }
 
         int siftUp(int i) { //просеивание вниз
+            int index = (i-1)/2;
+            while (heap.get(i) > heap.get(index)) {
+                swap(i, index);
+                i = index;
+            }
 
             return i;
         }
 
         void insert(Long value) { //вставка
+            heap.add(heap.size(),value);
+            siftUp(heap.size() - 1);
         }
 
         Long extractMax() { //извлечение и удаление максимума
-            Long result = null;
-
+            Long result = heap.get(0);
+            heap.set(0,heap.get(heap.size()-1));
+            heap.remove(heap.size()-1);
+            siftDown(0);
             return result;
         }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1

@@ -11,8 +11,8 @@ import static org.junit.Assert.assertTrue;
 public class Lesson4Test {
     @Test
     public void A() throws Exception {
-        String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream("C:\\Users\\CHUKIN\\Desktop\\Work\\Учёба\\3 курс\\2 сем\\ПИСЛ\\PISL2017-01-26\\src\\by\\it\\group473601\\atamanchuk\\lesson04\\dataA.txt");
+        String root=System.getProperty("user.dir")+"/src/";
+        InputStream stream = new FileInputStream(root+"by/it/group473601/atamanchuk/lesson04/dataA.txt");
         A_BinaryFind instance = new A_BinaryFind();
         //long startTime = System.currentTimeMillis();
         int[] result=instance.findIndex(stream);
@@ -28,8 +28,8 @@ public class Lesson4Test {
 
     @Test
     public void B() throws Exception {
-        String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream("C:\\Users\\CHUKIN\\Desktop\\Work\\Учёба\\3 курс\\2 сем\\ПИСЛ\\PISL2017-01-26\\src\\by\\it\\group473601\\atamanchuk\\lesson04\\dataB.txt");
+        String root=System.getProperty("user.dir")+"/src/";
+        InputStream stream = new FileInputStream(root+"by/it/group473601/atamanchuk/lesson04/dataB.txt");
         B_MergeSort instance = new B_MergeSort();
         //long startTime = System.currentTimeMillis();
         int[] result=instance.getMergeSort(stream);
@@ -47,8 +47,8 @@ public class Lesson4Test {
 
     @Test
     public void C() throws Exception {
-        String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream("C:\\Users\\CHUKIN\\Desktop\\Work\\Учёба\\3 курс\\2 сем\\ПИСЛ\\PISL2017-01-26\\src\\by\\it\\group473601\\atamanchuk\\lesson04\\dataC.txt");
+        String root=System.getProperty("user.dir")+"/src/";
+        InputStream stream = new FileInputStream(root+"by/it/group473601/atamanchuk/lesson04/dataC.txt");
         C_GetInversions instance = new C_GetInversions();
         //long startTime = System.currentTimeMillis();
         int result = instance.calc(stream);

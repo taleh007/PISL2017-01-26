@@ -38,9 +38,9 @@ public class FiboC {
             if(output.get(i-1) == 0 && output.get(i) == 1) break;
             i++;
         }
-        long period = output.size() - 2;
-        int index = (int)(n%period);
-        return output.get(index);
+        long periodPiano = output.size() - 2;
+        int surplus = (int)(n%periodPiano);
+        return output.get(surplus);
     }
 
 

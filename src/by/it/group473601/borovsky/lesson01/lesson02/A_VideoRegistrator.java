@@ -34,7 +34,7 @@ public class A_VideoRegistrator {
         Arrays.sort(events);
         while(i<events.length){
             result.add(events[i]);
-            double r = events[i] + 1;
+            double r = events[i] + workDuration;
             i++;
             while(i<events.length && events[i] <= r){
                 i++;

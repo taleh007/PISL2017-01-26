@@ -1,4 +1,4 @@
-package by.it.group473601.atamanchuk.lesson03;
+package by.it.group473601.zinkevich.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,42 +53,41 @@ public class B_Huffman {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
 
-        Map<String, Character> dictionaryEncode = new HashMap<>();
-
-        for(int i=0;i<count+1;i++) {
-            String lineFromFile = scanner.nextLine();
-            String[] splitLine = lineFromFile.split(":");
-
-            //char[] tmp = splitLine[0].trim().toCharArray();////////////////////???????????????????????????????????????????????????????????????????????????
-            // System.out.println(tmp[0]);
-
-            char symbol='0';
-            for(char tmpSymbol:splitLine[0].toCharArray()){
-                symbol=tmpSymbol;
-            }
-            String code="";
-            for(String tmpString:splitLine){
-                code=tmpString.trim();
-            }
-            dictionaryEncode.put(code,symbol);
+        String stringRead = scanner.nextLine();
+        Map<Integer, Character> hashMap = new HashMap<>();
+        for (int i = 0; i < count; i++){
+            stringRead = scanner.nextLine();
+            String[] parts = stringRead.split(": ");
+            hashMap.put(Integer.parseInt(parts[1]), parts[0].charAt(0));
         }
 
-        String inputData = scanner.nextLine();
-        String code="";
-        for(char key:inputData.toCharArray()) {
-            code+=key;
-            if(dictionaryEncode.containsKey(code)){
-                result.append(dictionaryEncode.get(code));
-                code="";
+        String stringReadWord = scanner.nextLine();
+        int numberWord = -2, flag = 0;
+        String numberString = "";
+        for (int i = 0; i < stringReadWord.length(); i++) {
+            if (flag == 0){
+                numberString = String.valueOf(stringReadWord.charAt(i));
+            }
+            else {
+                numberString += String.valueOf(stringReadWord.charAt(i));
+            }
+            numberWord = Integer.parseInt(numberString);
+            if (hashMap.containsKey(numberWord)){
+                result.append(hashMap.get(numberWord));
+                flag = 0;
+            }
+            else {
+                flag = 1;
             }
         }
+
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         return result.toString(); //01001100100111
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String root=System.getProperty("user.dir")+"/src/";
-        File f = new File(root+"by/it/group473601/atamanchuk/lesson03/encodeHuffman.txt");
+        String root = System.getProperty("user.dir") + "/src/";
+        File f = new File(root + "by/it/group473601/zinkevich/lesson03/encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         System.out.println(result);

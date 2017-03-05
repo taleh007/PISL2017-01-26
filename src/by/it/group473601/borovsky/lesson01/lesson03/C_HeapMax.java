@@ -1,4 +1,4 @@
-package by.it.group473601.atamanchuk.lesson03;
+package by.it.group473601.borovsky.lesson01.lesson03;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,45 +44,59 @@ public class C_HeapMax {
         private List<Long> heap = new ArrayList<>();
 
         int siftDown(int i) { //просеивание вверх
-            while(2*i+1<heap.size()){
-                int left = 2*i+1;
-                int right = 2*i+2;
+            while(2*i + 1 < heap.size()){
+                int left = 2*i + 1;
+                int right = 2*i + 2;
                 int j = left;
-                if(right>heap.size()&&heap.get(right)>heap.get(left)){///////////////////////////////////////
-                    j=right;
+                if(right < heap.size() && heap.get(right) < heap.get(left)){
+                    j = right;
+                    if(heap.get(i) <= heap.get(j)){
+                        break;
+                    }
+                    swap(heap.get(i),heap.get(j));
+                    i=j;
                 }
-                if(heap.get(i)>=heap.get(j)){/////////////////////
-                    break;
-                }
-                long tmp = heap.get(i);
-                heap.set(i,heap.get(j));
-                heap.set(j,tmp);
-                i=j;
             }
             return i;
         }
 
         int siftUp(int i) { //просеивание вниз
-            int index = (i-1)/2;
-            while(heap.get(i)>heap.get(index)){//////////////////////////
-                long tmp=heap.get(i);
-                heap.set(i,heap.get(index));
-                heap.set(index,tmp);
-                i=index;
+            while(heap.get(i) < heap.get((i-1)/2)){
+                swap(heap.get(i),heap.get((i-1)/2));
+                i = (i - 1)/2;
             }
             return i;
         }
 
+        private void swap(long a, long b){
+            long tmp = a;
+            a = b;
+            b = tmp;
+        }
+
         void insert(Long value) { //вставка
-            heap.add(heap.size(),value);
-            siftUp(heap.size()-1);
+            heap.add(value);
+            int index = heap.lastIndexOf(value);
+            siftUp(index);
         }
 
         Long extractMax() { //извлечение и удаление максимума
-            long max = heap.get(0);
-            heap.set(0,heap.get(heap.size()-1));
-            heap.remove(heap.size()-1);
-            siftDown(0);
+            long max = heap.get(heap.size() - 1);
+            int searchIndex = heap.size() - 1;
+            for(int i = heap.size() - 2; i >= 0;i--){
+                if(heap.get(i) > max){
+                    max = heap.get(i);
+                    searchIndex = i;
+                }
+            }
+            //System.out.println("Max value : " + max);
+            if(searchIndex * 2 + 1 > heap.size()){
+                heap.remove(searchIndex);
+            }else{
+                swap(max,heap.get(heap.size() - 1));
+                heap.remove(heap.get(heap.size() - 1));
+                siftDown(searchIndex);
+            }
             return max;
         }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -97,15 +111,14 @@ public class C_HeapMax {
         Integer count = scanner.nextInt();
         for (int i = 0; i < count; ) {
             String s = scanner.nextLine();
-            if (s.equalsIgnoreCase("ExtractMax")) {
+            if (s.equalsIgnoreCase("extractMax")) {
                 Long res=heap.extractMax();
                 if (res!=null && res>maxValue) maxValue=res;
-                System.out.println();
                 i++;
             }
             if (s.contains(" ")) {
                 String[] p = s.split(" ");
-                if (p[0].equalsIgnoreCase("Insert"))
+                if (p[0].equalsIgnoreCase("insert"))
                     heap.insert(Long.parseLong(p[1]));
                 i++;
             //System.out.println(heap); //debug
@@ -115,8 +128,8 @@ public class C_HeapMax {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String root=System.getProperty("user.dir")+"/src/";
-        InputStream stream = new FileInputStream(root+"by/it/group473601/atamanchuk/lesson03/heapData.txt");
+        String root = System.getProperty("user.dir") + "/src/";
+        InputStream stream = new FileInputStream(root + "by/it/group473601/borovsky/lesson01/lesson03/heapData.txt");
         C_HeapMax instance = new C_HeapMax();
         System.out.println("MAX="+instance.findMaxValue(stream));
     }

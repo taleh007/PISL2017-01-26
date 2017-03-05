@@ -1,5 +1,6 @@
-package by.it.group473601.atamanchuk.lesson03;
+package by.it.group473601.borovsky.lesson01.lesson03;
 
+import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -64,7 +65,6 @@ public class A_Huffman {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////
     //расширение базового класса до внутреннего узла дерева
     private class InternalNode extends Node {
         //внутренный узел дерева
@@ -87,7 +87,6 @@ public class A_Huffman {
 
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////
     //расширение базового класса до листа дерева
     private class LeafNode extends Node {
         //лист
@@ -106,73 +105,73 @@ public class A_Huffman {
         }
     }
 
+
+    private static Node ExcludeMinValue(PriorityQueue<Node> priorityQueue){
+        Node [] nodes = new Node[priorityQueue.size()];
+        priorityQueue.toArray(nodes);
+        Node minNode = nodes[0];
+        for(int i = 0 + 1;i < nodes.length;i++) {
+            if (nodes[i].frequence < minNode.frequence) {
+                minNode = nodes[i];
+            }
+        }
+        priorityQueue.remove(minNode);
+        return minNode;
+    }
+
     //индекс данных из листьев
     static private Map<Character, String> codes = new TreeMap<>();
 
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
     String encode(File file) throws FileNotFoundException {
-        //прочитаем строку для кодирования из тестового файла
+
         Scanner scanner = new Scanner(file);
         String s = scanner.next();
 
-        //все комментарии от тестового решения были оставлены т.к. это задание A.
-        //если они вам мешают их можно удалить
-
         Map<Character, Integer> count = new HashMap<>();
         //1. переберем все символы по очереди и рассчитаем их частоту в Map count
+        for(int i = 0;i<s.length();i++){
             //для каждого символа добавим 1 если его в карте еще нет или инкремент если есть.
-
-        for(int i=0;i<s.length();i++) {
-            if (count.containsKey(s.charAt(i))) {
-                int frequency = count.get(s.charAt(i));
-                frequency++;
-                count.put(s.charAt(i),frequency);
-            }
-            else {
-                count.put(s.charAt(i),1);
+            char currentChar = s.charAt(i);
+            if(!count.containsKey(currentChar)){
+                count.put(currentChar,1);
+            }else{
+                count.replace(currentChar,count.get(currentChar) + 1);
             }
         }
 
         //2. перенесем все символы в приоритетную очередь в виде листьев
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
 
-        for(char key:count.keySet()) {
-            Node node = new LeafNode(count.get(key),key);
-            priorityQueue.add(node);
+        ArrayList<Map.Entry<Character,Integer>> list = new ArrayList(count.entrySet());
+        Collections.sort(list, (Map.Entry<Character,Integer> o1, Map.Entry<Character,Integer> o2) ->(o1).getValue() < (o2).getValue() ? -1 : 1);
+        for(int i = 0; i < list.size();i++){
+            priorityQueue.add(new LeafNode(list.get(i).getValue(),list.get(i).getKey()));
         }
 
         //3. вынимая по два узла из очереди (для сборки родителя)
         //и возвращая этого родителя обратно в очередь
         //построим дерево кодирования Хаффмана.
         //У родителя частоты детей складываются.
-
-        while(true) {
-            Node firstChild = priorityQueue.poll();
-            Node secondChild = priorityQueue.poll();
-            if(firstChild==null||secondChild==null) {
-                if(firstChild!=null) {
-                    priorityQueue.add(firstChild);
-                }
-                break;
-            }
-            Node parent = new InternalNode(firstChild,secondChild);
-            priorityQueue.add(parent);
-
+        int to = priorityQueue.size() -1;
+        for(int i = 0; i < to; i++){
+            Node minNode1 = ExcludeMinValue(priorityQueue);
+            Node minNode2 = ExcludeMinValue(priorityQueue);
+            priorityQueue.add(new InternalNode(minNode1,minNode2));
         }
 
         //4. последний из родителей будет корнем этого дерева
         //это будет последний и единственный элемент оставшийся в очереди priorityQueue.
-
-        Node root = priorityQueue.poll();
-        root.fillCodes("");
-
         StringBuilder sb = new StringBuilder();
-        //.....
+        for(Node node : priorityQueue){
+            node.fillCodes("");
+        }
 
-       for(int i=0;i<s.length();i++) {
-           sb.append(codes.get(s.charAt(i)));
-       }
+        for(int i = 0;i < s.length();i++){
+            sb.append(codes.get(s.charAt(i)));
+        }
+        //.....
 
         return sb.toString();
         //01001100100111
@@ -182,16 +181,22 @@ public class A_Huffman {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        String root=System.getProperty("user.dir")+"/src/";
-        File f = new File(root+"by/it/group473601/atamanchuk/lesson03/dataHuffman.txt");
+        String root = System.getProperty("user.dir") + "/src/";
+        File f = new File(root + "by/it/group473601/borovsky/lesson01/lesson03/dataHuffman.txt");
+
         A_Huffman instance = new A_Huffman();
+
         long startTime = System.currentTimeMillis();
         String result = instance.encode(f);
+
         long finishTime = System.currentTimeMillis();
+
         System.out.printf("%d %d\n", codes.size(), result.length());
+
         for (Map.Entry<Character, String> entry : codes.entrySet()) {
             System.out.printf("%s: %s\n", entry.getKey(), entry.getValue());
         }
+
         System.out.println(result);
     }
 

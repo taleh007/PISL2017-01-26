@@ -1,4 +1,4 @@
-package by.it.group473601.atamanchuk.lesson03;
+package by.it.group473601.irina_petrova.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,38 +48,23 @@ public class B_Huffman {
         StringBuilder result=new StringBuilder();
         //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(file);
-        Integer count = scanner.nextInt();
-        Integer length = scanner.nextInt();
+        Integer charCount = scanner.nextInt();//4
+        Integer lengthCode = scanner.nextInt();//14
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
-
-        Map<String, Character> dictionaryEncode = new HashMap<>();
-
-        for(int i=0;i<count+1;i++) {
-            String lineFromFile = scanner.nextLine();
-            String[] splitLine = lineFromFile.split(":");
-
-            //char[] tmp = splitLine[0].trim().toCharArray();////////////////////???????????????????????????????????????????????????????????????????????????
-            // System.out.println(tmp[0]);
-
-            char symbol='0';
-            for(char tmpSymbol:splitLine[0].toCharArray()){
-                symbol=tmpSymbol;
-            }
-            String code="";
-            for(String tmpString:splitLine){
-                code=tmpString.trim();
-            }
-            dictionaryEncode.put(code,symbol);
+        Map<String, Character> sombleAndCode = new HashMap<>();
+        for (int i = 0; i < charCount; i++){
+            char letters = scanner.next().charAt(0);
+            String code = scanner.next();
+            sombleAndCode.put(code, letters);
         }
-
-        String inputData = scanner.nextLine();
-        String code="";
-        for(char key:inputData.toCharArray()) {
-            code+=key;
-            if(dictionaryEncode.containsKey(code)){
-                result.append(dictionaryEncode.get(code));
-                code="";
+        String allCode = scanner.next();
+        String encode = "";
+        for (int i = 0; i < allCode.length(); i++){
+            encode = encode + allCode.charAt(i);
+            if (sombleAndCode.containsKey(encode)) {
+                result.append(sombleAndCode.get(encode));
+                encode = "";
             }
         }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -87,12 +72,10 @@ public class B_Huffman {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String root=System.getProperty("user.dir")+"/src/";
-        File f = new File(root+"by/it/group473601/atamanchuk/lesson03/encodeHuffman.txt");
+        String root = System.getProperty("user.dir") + "/src/";
+        File f = new File(root + "by/it/a_khmelev/lesson03/encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         System.out.println(result);
     }
-
-
 }

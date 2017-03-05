@@ -1,10 +1,12 @@
-package by.it.group473601.atamanchuk.lesson03;
+package by.it.group473601.vabishchevich.lesson03;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 // Lesson 3. B_Huffman.
 // Восстановите строку по её коду и беспрефиксному коду символов.
@@ -48,47 +50,38 @@ public class B_Huffman {
         StringBuilder result=new StringBuilder();
         //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(file);
-        Integer count = scanner.nextInt();
-        Integer length = scanner.nextInt();
+        Integer count = scanner.nextInt(); //
+        Integer length = scanner.nextInt(); //
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
-
-        Map<String, Character> dictionaryEncode = new HashMap<>();
-
-        for(int i=0;i<count+1;i++) {
-            String lineFromFile = scanner.nextLine();
-            String[] splitLine = lineFromFile.split(":");
-
-            //char[] tmp = splitLine[0].trim().toCharArray();////////////////////???????????????????????????????????????????????????????????????????????????
-            // System.out.println(tmp[0]);
-
-            char symbol='0';
-            for(char tmpSymbol:splitLine[0].toCharArray()){
-                symbol=tmpSymbol;
-            }
-            String code="";
-            for(String tmpString:splitLine){
-                code=tmpString.trim();
-            }
-            dictionaryEncode.put(code,symbol);
+        Map<String,String> characters = new HashMap<>();
+        int i=0;
+        String symbol;
+        int code;
+        String line = scanner.nextLine();
+        for (i=0;i<count;i++)
+        {
+            line= scanner.nextLine();
+            String [] arr = line.split(": ");
+            characters.put(arr[1],arr[0]);
         }
-
-        String inputData = scanner.nextLine();
-        String code="";
-        for(char key:inputData.toCharArray()) {
-            code+=key;
-            if(dictionaryEncode.containsKey(code)){
-                result.append(dictionaryEncode.get(code));
-                code="";
-            }
-        }
+        String stringToDecode = scanner.nextLine();
+        String find="";
+       for (char key:stringToDecode.toCharArray()) {
+           find += key;
+           if(characters.containsKey(find))
+           {
+               result.append(characters.get(find));
+               find="";
+           }
+       }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         return result.toString(); //01001100100111
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String root=System.getProperty("user.dir")+"/src/";
-        File f = new File(root+"by/it/group473601/atamanchuk/lesson03/encodeHuffman.txt");
+        String root = System.getProperty("user.dir") + "/src/";
+        File f = new File("C:\\Users\\Колобок\\IdeaProjects\\PISL2017-01-26\\src\\by\\it\\group473601\\vabishchevich\\lesson03\\encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         System.out.println(result);

@@ -137,16 +137,27 @@ public class A_Huffman {
             LeafNode leafNode = new LeafNode(count.get(key),key);
             priorityQueue.add(leafNode);
         }
+
         //3. вынимая по два узла из очереди (для сборки родителя)
         //и возвращая этого родителя обратно в очередь
         //построим дерево кодирования Хаффмана.
         //У родителя частоты детей складываются.
+        while (priorityQueue.size()>1)
+        {
+           Node first = priorityQueue.poll();
+           Node next = priorityQueue.poll();
 
+           priorityQueue.offer(new InternalNode(first,next));
+        }
         //4. последний из родителей будет корнем этого дерева
         //это будет последний и единственный элемент оставшийся в очереди priorityQueue.
+        Node root = priorityQueue.poll();
+        root.fillCodes("");
         StringBuilder sb = new StringBuilder();
         //.....
-
+        for(i=0;i<s.length();i++) {
+            sb.append(codes.get(s.charAt(i)));
+        }
         return sb.toString();
         //01001100100111
         //01001100100111
@@ -156,7 +167,7 @@ public class A_Huffman {
 
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "by/it/a_khmelov/lesson03/dataHuffman.txt");
+        File f = new File("C:\\Users\\Колобок\\IdeaProjects\\PISL2017-01-26\\src\\by\\it\\group473601\\vabishchevich\\lesson03\\dataHuffman.txt");
         A_Huffman instance = new A_Huffman();
         long startTime = System.currentTimeMillis();
         String result = instance.encode(f);

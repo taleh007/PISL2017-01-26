@@ -22,7 +22,7 @@ public class Lesson3Test {
     @Test
     public void A() throws Exception {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "by/it/a_khmelov/lesson03/dataHuffman.txt");
+        File f = new File("C:\\Users\\Колобок\\IdeaProjects\\PISL2017-01-26\\src\\by\\it\\group473601\\vabishchevich\\lesson03\\dataHuffman.txt");
         A_Huffman instance = new A_Huffman();
         String result = instance.encode(f);
         boolean ok=result.equals("01001100100111");

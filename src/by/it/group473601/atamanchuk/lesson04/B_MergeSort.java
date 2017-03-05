@@ -24,17 +24,19 @@ public class B_MergeSort {
 
 
     int[] merge(int[] firstArray, int[] secondArray){
-        int firstLength = firstArray.length, secondLength = secondArray.length;
-        int a = 0, b = 0, len = firstLength + secondLength;
-        int[] result = new int[len];
-        for (int i = 0; i < len; i++) {
-            if (b < secondLength && a < firstLength) {
-                if (firstArray[a] > secondArray[b]) result[i] = secondArray[b++];
-                else result[i] = firstArray[a++];
-            } else if (b < secondLength) {
-                result[i] = secondArray[b++];
+        int firstLengthArray = firstArray.length, secondLengthArray = secondArray.length;
+        int indexFirstArray = 0;
+        int indexRSecondArray = 0;
+        int length = firstLengthArray + secondLengthArray;
+        int[] result = new int[length];
+        for (int i = 0; i < length; i++) {
+            if (indexRSecondArray < secondLengthArray && indexFirstArray < firstLengthArray) {
+                if (firstArray[indexFirstArray] > secondArray[indexRSecondArray]) result[i] = secondArray[indexRSecondArray++];
+                else result[i] = firstArray[indexFirstArray++];
+            } else if (indexRSecondArray < secondLengthArray) {
+                result[i] = secondArray[indexRSecondArray++];
             } else {
-                result[i] = firstArray[a++];
+                result[i] = firstArray[indexFirstArray++];
             }
         }
         return result;

@@ -54,7 +54,7 @@ public class B_Huffman {
         Integer length = scanner.nextInt(); //
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
-        Map<Integer,String> characters = new HashMap<>();
+        Map<String,String> characters = new HashMap<>();
         int i=0;
         String symbol;
         int code;
@@ -63,14 +63,18 @@ public class B_Huffman {
         {
             line= scanner.nextLine();
             String [] arr = line.split(": ");
-            characters.put(Integer.parseInt(arr[1]),arr[0]);
+            characters.put(arr[1],arr[0]);
         }
         String stringToDecode = scanner.nextLine();
-        System.out.println(stringToDecode);
         String find="";
-
-
-        System.out.println(result.toString());
+       for (char key:stringToDecode.toCharArray()) {
+           find += key;
+           if(characters.containsKey(find))
+           {
+               result.append(characters.get(find));
+               find="";
+           }
+       }
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         return result.toString(); //01001100100111
     }

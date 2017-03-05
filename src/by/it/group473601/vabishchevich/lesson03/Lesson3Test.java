@@ -32,7 +32,7 @@ public class Lesson3Test {
     @Test
     public void B() throws Exception {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "C:\\Users\\Колобок\\IdeaProjects\\PISL2017-01-26\\src\\by\\it\\group473601\\vabishchevich\\lesson03\\encodeHuffman.txt");
+        File f = new File( "C:\\Users\\Колобок\\IdeaProjects\\PISL2017-01-26\\src\\by\\it\\group473601\\vabishchevich\\lesson03\\encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         boolean ok=result.equals("abacabad");

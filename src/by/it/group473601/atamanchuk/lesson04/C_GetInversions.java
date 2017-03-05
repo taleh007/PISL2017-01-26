@@ -63,8 +63,8 @@ public class C_GetInversions {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream("C:\\Users\\CHUKIN\\Desktop\\Work\\Учёба\\3 курс\\2 сем\\ПИСЛ\\PISL2017-01-26\\src\\by\\it\\group473601\\atamanchuk\\lesson04\\dataC.txt");
+        String root=System.getProperty("user.dir")+"/src/";
+        InputStream stream = new FileInputStream(root+"by/it/group473601/atamanchuk/lesson04/dataC.txt");
         C_GetInversions instance = new C_GetInversions();
         //long startTime = System.currentTimeMillis();
         int result = instance.calc(stream);

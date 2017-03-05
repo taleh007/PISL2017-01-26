@@ -3,6 +3,7 @@ package by.it.group473601.atamanchuk.lesson04;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -35,6 +36,40 @@ Sample Output:
 
 public class C_GetInversions {
 
+    private long merge(int[] resultArray, int[] leftArray, int[] rightArray) {
+        int indexFirstArray = 0, indexSecondArray = 0, countInverse = 0;
+        while (indexFirstArray < leftArray.length || indexSecondArray < rightArray.length) {
+            if (indexFirstArray == leftArray.length) {
+                resultArray[indexFirstArray+indexSecondArray] = rightArray[indexSecondArray];
+                indexSecondArray++;
+            } else if (indexSecondArray == rightArray.length) {
+                resultArray[indexFirstArray+indexSecondArray] = leftArray[indexFirstArray];
+                indexFirstArray++;
+            } else if (leftArray[indexFirstArray] <= rightArray[indexSecondArray]) {
+                resultArray[indexFirstArray+indexSecondArray] = leftArray[indexFirstArray];
+                indexFirstArray++;
+            } else {
+                resultArray[indexFirstArray+indexSecondArray] = rightArray[indexSecondArray];
+                countInverse += leftArray.length-indexFirstArray;
+                indexSecondArray++;
+            }
+        }
+        return countInverse;
+    }
+
+    private long inverseCount(int[] array) {
+        if (array.length < 2)
+            return 0;
+
+        int middle = (array.length + 1) / 2;
+        int leftArray[] = Arrays.copyOfRange(array, 0, middle);
+        int rightArray[] = Arrays.copyOfRange(array, middle, array.length);
+        return inverseCount(leftArray) + inverseCount(rightArray) + merge(array, leftArray, rightArray);
+    }
+
+
+
+
     int calc(InputStream stream) throws FileNotFoundException {
         //подготовка к чтению данных
         Scanner scanner = new Scanner(stream);
@@ -49,8 +84,8 @@ public class C_GetInversions {
         int result = 0;
         //!!!!!!!!!!!!!!!!!!!!!!!!     тут ваше решение   !!!!!!!!!!!!!!!!!!!!!!!!
 
-
-
+        result=(int) inverseCount(a);
+        System.out.println(result);
 
 
 

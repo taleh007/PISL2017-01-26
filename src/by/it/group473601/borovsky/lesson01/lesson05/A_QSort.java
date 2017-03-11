@@ -3,6 +3,7 @@ package by.it.group473601.borovsky.lesson01.lesson05;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -57,9 +58,43 @@ public class A_QSort {
         @Override
         public int compareTo(Object o) {
             //подумайте, что должен возвращать компаратор отрезков
-            return this.stop < ((Segment)o).stop ? -1 : 1;
-            //return 0;
+            if(this.stop < ((Segment)o).stop) return -1;
+            if(this.stop > ((Segment)o).stop) return 1;
+            //return this.stop <= ((Segment)o).stop ? -1 : 1;
+            return 0;
         }
+    }
+
+    private void quicksort(Segment[] segments,  int left, int right) {
+        if (left >= right)
+            return;
+        int i = left, j = right;
+        Segment pivot = segments[left + (right-left)/2];
+
+
+        while (i <= j) {
+            while (segments[i].compareTo(pivot) == -1) {
+                i++;
+            }
+            while (segments[j].compareTo(pivot) == 1) {
+                j--;
+            }
+            if (i <= j) {
+                swap(segments, i, j);
+                i++;
+                j--;
+            }
+        }
+        if (left < j)
+            quicksort(segments, left, j);
+        if (i < right)
+            quicksort(segments, i, right);
+    }
+
+    private void swap(Segment [] segments, int i, int j) {
+        Segment temp = segments[i];
+        segments[i] = segments[j];
+        segments[j] = temp;
     }
 
 
@@ -80,9 +115,20 @@ public class A_QSort {
             //читаем начало и конец каждого отрезка
             segments[i]=new Segment(scanner.nextInt(),scanner.nextInt());
         }
+
+        quicksort(segments,0,segments.length - 1);
+        for(int i = 0; i < segments.length; i++){
+            System.out.println(segments[i].start + " " + segments[i].stop);
+        }
+
         //читаем точки
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < m; i++) {
             points[i]=scanner.nextInt();
+            for(int k = 0; k < segments.length; k++){
+                if(points[i] >= segments[k].start && points[i] <= segments[k].stop){
+                    result[i]++;
+                }
+            }
         }
         //тут реализуйте логику задачи с применением быстрой сортировки
         //в классе отрезка Segment реализуйте нужный для этой задачи компаратор

@@ -3,6 +3,10 @@ package by.it.group473601.borovsky.lesson01.lesson04;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -21,7 +25,50 @@ Sample Output:
 */
 public class B_MergeSort {
 
-    int[] merge(int[] ar_1, int[] ar_2){
+    int[] mergeArrays(int [] arrayForMergeOne, int [] arrayForMergeTwo){
+
+        /*System.out.println("----------ONE---------------");
+        for(int i = 0; i < arrayForMergeOne.length; i++){
+            System.out.println(arrayForMergeOne[i]);
+        }
+        System.out.println("------------------------------");*/
+
+        int sumLength = arrayForMergeOne.length + arrayForMergeTwo.length;
+        int indexForArrayOne = 0;
+        int indexForArrayTwo = 0;
+        List<Integer> result = new ArrayList<>();
+
+
+        for(int i = 0; i < sumLength; i++){
+            if (indexForArrayOne == arrayForMergeOne.length)
+            {
+                result.add(arrayForMergeTwo[indexForArrayTwo]);
+                indexForArrayTwo++;
+                continue;
+            }
+            if(indexForArrayTwo == arrayForMergeTwo.length)
+            {
+                result.add(arrayForMergeOne[indexForArrayOne]);
+                indexForArrayOne++;
+                continue;
+            }
+            if (arrayForMergeOne[indexForArrayOne] <= arrayForMergeTwo[indexForArrayTwo])
+            {
+                result.add(arrayForMergeOne[indexForArrayOne]);
+                indexForArrayOne++;
+            }
+            else
+            {
+                result.add(arrayForMergeTwo[indexForArrayTwo]);
+                indexForArrayTwo++;
+            }
+        }
+
+        int[] resultArray = result.stream().mapToInt(i->i).toArray();
+        return resultArray;
+    }
+
+    /*int[] merge(int[] ar_1, int[] ar_2){
         int max = ar_1.length + ar_2.length;
         int[] result = new int[max];
         int m = 0, n = 0;
@@ -52,7 +99,17 @@ public class B_MergeSort {
             result[0] = arr[l];
             return result;
         }
+    }*/
+
+
+
+
+    int [] mergeSort(int [] arrayToSort){
+        if(arrayToSort.length <= 1) return arrayToSort;
+        return mergeArrays(mergeSort(Arrays.copyOfRange(arrayToSort,0,arrayToSort.length/2)),
+                mergeSort(Arrays.copyOfRange(arrayToSort,arrayToSort.length/2,arrayToSort.length)));
     }
+
 
     int[] getMergeSort(InputStream stream) throws FileNotFoundException {
         //подготовка к чтению данных
@@ -72,9 +129,9 @@ public class B_MergeSort {
         // тут ваше решение (реализуйте сортировку слиянием)
         // https://ru.wikipedia.org/wiki/Сортировка_слиянием
 
-        a = mergeSort(a, 0, a.length - 1);
+        //a = mergeSort(a, 0, a.length - 1);
 
-
+        a=mergeSort(a);
 
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!

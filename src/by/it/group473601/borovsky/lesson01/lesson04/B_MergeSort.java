@@ -25,49 +25,6 @@ Sample Output:
 */
 public class B_MergeSort {
 
-    int[] mergeArrays(int [] arrayForMergeOne, int [] arrayForMergeTwo){
-
-        /*System.out.println("----------ONE---------------");
-        for(int i = 0; i < arrayForMergeOne.length; i++){
-            System.out.println(arrayForMergeOne[i]);
-        }
-        System.out.println("------------------------------");*/
-
-        int sumLength = arrayForMergeOne.length + arrayForMergeTwo.length;
-        int indexForArrayOne = 0;
-        int indexForArrayTwo = 0;
-        List<Integer> result = new ArrayList<>();
-
-
-        for(int i = 0; i < sumLength; i++){
-            if (indexForArrayOne == arrayForMergeOne.length)
-            {
-                result.add(arrayForMergeTwo[indexForArrayTwo]);
-                indexForArrayTwo++;
-                continue;
-            }
-            if(indexForArrayTwo == arrayForMergeTwo.length)
-            {
-                result.add(arrayForMergeOne[indexForArrayOne]);
-                indexForArrayOne++;
-                continue;
-            }
-            if (arrayForMergeOne[indexForArrayOne] <= arrayForMergeTwo[indexForArrayTwo])
-            {
-                result.add(arrayForMergeOne[indexForArrayOne]);
-                indexForArrayOne++;
-            }
-            else
-            {
-                result.add(arrayForMergeTwo[indexForArrayTwo]);
-                indexForArrayTwo++;
-            }
-        }
-
-        int[] resultArray = result.stream().mapToInt(i->i).toArray();
-        return resultArray;
-    }
-
     /*int[] merge(int[] ar_1, int[] ar_2){
         int max = ar_1.length + ar_2.length;
         int[] result = new int[max];
@@ -101,7 +58,41 @@ public class B_MergeSort {
         }
     }*/
 
+    int[] mergeArrays(int [] arrayForMergeOne, int [] arrayForMergeTwo){
 
+        int sumLength = arrayForMergeOne.length + arrayForMergeTwo.length;
+        int indexForArrayOne = 0;
+        int indexForArrayTwo = 0;
+        List<Integer> result = new ArrayList<>();
+
+        for(int i = 0; i < sumLength; i++){
+            if (indexForArrayOne == arrayForMergeOne.length)
+            {
+                result.add(arrayForMergeTwo[indexForArrayTwo]);
+                indexForArrayTwo++;
+                continue;
+            }
+            if(indexForArrayTwo == arrayForMergeTwo.length)
+            {
+                result.add(arrayForMergeOne[indexForArrayOne]);
+                indexForArrayOne++;
+                continue;
+            }
+            if (arrayForMergeOne[indexForArrayOne] <= arrayForMergeTwo[indexForArrayTwo])
+            {
+                result.add(arrayForMergeOne[indexForArrayOne]);
+                indexForArrayOne++;
+            }
+            else
+            {
+                result.add(arrayForMergeTwo[indexForArrayTwo]);
+                indexForArrayTwo++;
+            }
+        }
+
+        int[] resultArray = result.stream().mapToInt(i->i).toArray();
+        return resultArray;
+    }
 
 
     int [] mergeSort(int [] arrayToSort){

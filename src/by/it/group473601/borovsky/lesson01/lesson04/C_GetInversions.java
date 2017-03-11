@@ -3,6 +3,9 @@ package by.it.group473601.borovsky.lesson01.lesson04;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -35,6 +38,53 @@ Sample Output:
 
 public class C_GetInversions {
 
+    int mergeArrays(int[] baseArray, int [] arrayForMergeOne, int [] arrayForMergeTwo){
+
+        int sumLength = arrayForMergeOne.length + arrayForMergeTwo.length;
+        int indexForArrayOne = 0;
+        int indexForArrayTwo = 0;
+        int inverseCount = 0;
+        List<Integer> result = new ArrayList<>();
+
+        for(int i = 0; i < sumLength; i++){
+            if (indexForArrayOne == arrayForMergeOne.length)
+            {
+                result.add(arrayForMergeTwo[indexForArrayTwo]);
+                indexForArrayTwo++;
+                continue;
+            }
+            if(indexForArrayTwo == arrayForMergeTwo.length)
+            {
+                result.add(arrayForMergeOne[indexForArrayOne]);
+                indexForArrayOne++;
+                continue;
+            }
+            if (arrayForMergeOne[indexForArrayOne] <= arrayForMergeTwo[indexForArrayTwo])
+            {
+                result.add(arrayForMergeOne[indexForArrayOne]);
+                indexForArrayOne++;
+            }
+            else
+            {
+                result.add(arrayForMergeTwo[indexForArrayTwo]);
+                inverseCount += arrayForMergeOne.length-indexForArrayOne;
+                indexForArrayTwo++;
+            }
+        }
+
+        return inverseCount;
+    }
+
+    int getInversions(int[] inputArray){
+        if(inputArray.length <= 1){
+            return 0;
+        }
+        int middle = (inputArray.length + 1)/2;
+        return getInversions(Arrays.copyOfRange(inputArray, 0, middle)) +
+                getInversions(Arrays.copyOfRange(inputArray, middle, inputArray.length)) +
+                mergeArrays(inputArray, Arrays.copyOfRange(inputArray, 0, middle), Arrays.copyOfRange(inputArray, middle, inputArray.length));
+    }
+
     int calc(InputStream stream) throws FileNotFoundException {
         //подготовка к чтению данных
         Scanner scanner = new Scanner(stream);
@@ -49,13 +99,7 @@ public class C_GetInversions {
         int result = 0;
         //!!!!!!!!!!!!!!!!!!!!!!!!     тут ваше решение   !!!!!!!!!!!!!!!!!!!!!!!!
 
-
-
-
-
-
-
-
+        result = getInversions(a);
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;

@@ -58,8 +58,9 @@ public class C_GetInversions {
     }
 
     private long inverseCount(int[] array) {
-        if (array.length < 2)
+        if (array.length < 2) {
             return 0;
+        }
 
         int middle = (array.length + 1) / 2;
         int leftArray[] = Arrays.copyOfRange(array, 0, middle);
@@ -86,12 +87,6 @@ public class C_GetInversions {
 
         result=(int) inverseCount(a);
         System.out.println(result);
-
-
-
-
-
-
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;
     }

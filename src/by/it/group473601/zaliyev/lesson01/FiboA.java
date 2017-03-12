@@ -10,10 +10,6 @@ public class FiboA {
 
     private long startTime = System.currentTimeMillis();
 
-    private long time() {
-        return System.currentTimeMillis() - startTime;
-    }
-
     public static void main(String[] args) {
         FiboA fibo = new FiboA();
         int n = 33;
@@ -23,14 +19,17 @@ public class FiboA {
         System.out.printf("slowA(%d)=%d \n\t time=%d \n\n", n, fibo.slowA(n), fibo.time());
     }
 
+    private long time() {
+        return System.currentTimeMillis() - startTime;
+    }
 
     private int calc(int n) {
         int a = 1;
         int b = 1;
-        if(n < 3)
+        if (n < 3)
             return 1;
         else {
-            for(int i = 0; i < (n - 2); i++) {
+            for (int i = 0; i < (n - 2); i++) {
                 b += a;
                 a = b - a;
             }
@@ -40,7 +39,7 @@ public class FiboA {
 
 
     BigInteger slowA(Integer n) {
-        if(n < 3)
+        if (n < 3)
             return BigInteger.ONE;
         else {
             return slowA(n - 1).add(slowA(n - 2));

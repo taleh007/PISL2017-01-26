@@ -22,7 +22,7 @@ public class Lesson3Test {
     @Test
     public void A() throws Exception {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "by/it/a_khmelov/lesson03/dataHuffman.txt");
+        File f = new File(root + "by/it/group473601/dontsova/lesson3/dataHuffman.txt");
         A_Huffman instance = new A_Huffman();
         String result = instance.encode(f);
         boolean ok=result.equals("01001100100111");
@@ -32,7 +32,7 @@ public class Lesson3Test {
     @Test
     public void B() throws Exception {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "by/it/a_khmelov/lesson03/encodeHuffman.txt");
+        File f = new File(root + "by/it/group473601/dontsova/lesson3/encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         boolean ok=result.equals("abacabad");

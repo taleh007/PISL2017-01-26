@@ -2,6 +2,7 @@ package by.it.group473601.dontsova.lesson3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 // Lesson 3. B_Huffman.
@@ -51,6 +52,26 @@ public class B_Huffman {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
 
+        String line=scanner.nextLine();
+        String[] dop;
+        HashMap<String,String> symbols=new HashMap<>();
+        for(int i=0;i<count;i++)
+        {
+            line=scanner.nextLine();
+            dop=line.split(": ");
+            symbols.put(dop[1],dop[0]);
+        }
+        String coding=scanner.nextLine();
+        String symbol="";
+        for(char i:coding.toCharArray())
+        {
+            symbol+=i;
+            if(symbols.containsKey(symbol))
+            {
+                result.append(symbols.get(symbol));
+                symbol="";
+            }
+        }
 
 
 
@@ -60,7 +81,7 @@ public class B_Huffman {
 
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "by/it/a_khmelov/lesson03/encodeHuffman.txt");
+        File f = new File(root + "by/it/group473601/dontsova/lesson3/encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         System.out.println(result);

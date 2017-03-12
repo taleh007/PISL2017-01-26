@@ -60,7 +60,6 @@ public class A_QSort {
             //подумайте, что должен возвращать компаратор отрезков
             if(this.stop < ((Segment)o).stop) return -1;
             if(this.stop > ((Segment)o).stop) return 1;
-            //return this.stop <= ((Segment)o).stop ? -1 : 1;
             return 0;
         }
     }
@@ -70,7 +69,6 @@ public class A_QSort {
             return;
         int i = left, j = right;
         Segment pivot = segments[left + (right-left)/2];
-
 
         while (i <= j) {
             while (segments[i].compareTo(pivot) == -1) {
@@ -117,9 +115,6 @@ public class A_QSort {
         }
 
         quicksort(segments,0,segments.length - 1);
-        for(int i = 0; i < segments.length; i++){
-            System.out.println(segments[i].start + " " + segments[i].stop);
-        }
 
         //читаем точки
         for (int i = 0; i < m; i++) {

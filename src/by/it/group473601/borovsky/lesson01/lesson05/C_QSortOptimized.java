@@ -38,13 +38,20 @@ public class C_QSortOptimized {
         int stop;
 
         Segment(int start, int stop){
-            this.start = start;
-            this.stop = stop;
+            if(start <= stop){
+                this.start = start;
+                this.stop = stop;
+            }else{
+                this.start = stop;
+                this.stop = start;
+            }
         }
 
         @Override
         public int compareTo(Object o) {
             //подумайте, что должен возвращать компаратор отрезков
+            if(this.stop < ((Segment)o).stop) return -1;
+            if(this.stop > ((Segment)o).stop) return 1;
             return 0;
         }
     }

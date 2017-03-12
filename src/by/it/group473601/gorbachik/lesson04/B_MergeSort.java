@@ -21,29 +21,28 @@ Sample Output:
 */
 public class B_MergeSort {
 
-    int[] merge(int[] ar_1, int[] ar_2){
-        int max = ar_1.length + ar_2.length;
-        int[] result = new int[max];
-        int m = 0, n = 0;
-        for (int i = 0; i < max; i++){
-            if (m >= ar_1.length & n < ar_2.length){
-                result[i] = ar_2[n];
-                n++;
-            }else if(n >= ar_2.length & m < ar_1.length){
-                result[i] = ar_1[m];
-                m++;
-            }else if (ar_1[m] <= ar_2[n] & m < ar_1.length){
-                result[i] = ar_1[m];
-                m++;
-            }else {
-                result[i] = ar_2[n];
-                n++;
+    private int[] merge(int[] arr_1, int[] arr_2){
+        int len_1 = arr_1.length, len_2 = arr_2.length;
+        int arr_1_index = 0, arr_2_index = 0, finalLen = len_1 + len_2;
+        int[] result = new int[finalLen];
+        for (int i = 0; i < finalLen; i++) {
+            if (arr_1_index < len_1 && arr_2_index < len_2) {
+                if (arr_1[arr_1_index] > arr_2[arr_2_index]) result[i] = arr_2[arr_2_index++];
+                else result[i] = arr_1[arr_1_index++];
+            }
+
+            else if (arr_2_index < len_2) {
+                result[i] = arr_2[arr_2_index++];
+            }
+
+            if (arr_2_index > len_2) {
+                result[i] = arr_1[arr_1_index++];
             }
         }
         return result;
     }
 
-    int[] mergeSort(int[] arr, int l, int r){
+    private int[] mergeSort(int[] arr, int l, int r){
         int[] result = new int[1];
         int index = (int)(l + r) / 2;
         if (l < r){
@@ -65,19 +64,9 @@ public class B_MergeSort {
         int[] a=new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
-            System.out.println(a[i]);
-
         }
 
-        // тут ваше решение (реализуйте сортировку слиянием)
-        // https://ru.wikipedia.org/wiki/Сортировка_слиянием
-
         a = mergeSort(a, 0, a.length - 1);
-
-
-
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return a;
     }
     public static void main(String[] args) throws FileNotFoundException {

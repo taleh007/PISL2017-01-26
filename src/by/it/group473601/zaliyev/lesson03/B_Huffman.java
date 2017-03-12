@@ -2,6 +2,7 @@ package by.it.group473601.zaliyev.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 // Lesson 3. B_Huffman.
@@ -42,29 +43,38 @@ import java.util.Scanner;
 
 public class B_Huffman {
 
-    String decode(File file) throws FileNotFoundException {
-        StringBuilder result=new StringBuilder();
-        //прочитаем строку для кодирования из тестового файла
-        Scanner scanner = new Scanner(file);
-        Integer count = scanner.nextInt();
-        Integer length = scanner.nextInt();
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-        //тут запишите ваше решение
-
-
-
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-        return result.toString(); //01001100100111
-    }
-
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "by/it/a_khmelov/lesson03/encodeHuffman.txt");
+        File f = new File(root + "by/it/group473601/zaliyev/lesson03/encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         System.out.println(result);
     }
 
-
+    String decode(File file) throws FileNotFoundException {
+        StringBuilder result = new StringBuilder();
+        Scanner scanner = new Scanner(file);
+        Integer count = scanner.nextInt();
+        Integer length = scanner.nextInt();
+        HashMap<String, String> dict = new HashMap<>();
+        scanner.nextLine();
+        String[] lines;
+        for (int i = 0; i < count; i++) {
+            lines = scanner.nextLine().split(": ");
+            dict.put(lines[1], lines[0]);
+        }
+        String input = scanner.nextLine();
+        String substring;
+        for (int i = 0; i < length; i++) {
+            for (int j = i; j < length + 1; j++) {
+                substring = input.substring(i, j);
+                if (dict.containsKey(substring)) {
+                    result.append(dict.get(substring));
+                    i = j - 1;
+                    break;
+                }
+            }
+        }
+        return result.toString();
+    }
 }

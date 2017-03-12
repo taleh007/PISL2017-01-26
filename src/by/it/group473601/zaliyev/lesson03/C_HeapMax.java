@@ -1,5 +1,6 @@
 package by.it.group473601.zaliyev.lesson03;
 
+import javax.management.MXBean;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -37,45 +38,23 @@ import java.util.Scanner;
 
 public class C_HeapMax {
 
-    private class MaxHeap {
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-        //тут запишите ваше решение.
-        //Будет мало? Ну тогда можете его собрать как Generic и/или использовать в варианте B
-        private List<Long> heap = new ArrayList<>();
-
-        int siftDown(int i) { //просеивание вверх
-
-            return i;
-        }
-
-        int siftUp(int i) { //просеивание вниз
-
-            return i;
-        }
-
-        void insert(Long value) { //вставка
-        }
-
-        Long extractMax() { //извлечение и удаление максимума
-            Long result = null;
-
-            return result;
-        }
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    public static void main(String[] args) throws FileNotFoundException {
+        String root = System.getProperty("user.dir") + "/src/";
+        InputStream stream = new FileInputStream(root + "by/it/group473601/zaliyev/lesson03/heapData.txt");
+        C_HeapMax instance = new C_HeapMax();
+        System.out.println("MAX=" + instance.findMaxValue(stream));
     }
 
-    //эта процедура читает данные из файла, ее можно не менять.
     Long findMaxValue(InputStream stream) {
-        Long maxValue=0L;
+        Long maxValue = 0L;
         MaxHeap heap = new MaxHeap();
-        //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(stream);
         Integer count = scanner.nextInt();
         for (int i = 0; i < count; ) {
             String s = scanner.nextLine();
             if (s.equalsIgnoreCase("extractMax")) {
-                Long res=heap.extractMax();
-                if (res!=null && res>maxValue) maxValue=res;
+                Long res = heap.extractMax();
+                if (res != null && res > maxValue) maxValue = res;
                 System.out.println();
                 i++;
             }
@@ -84,21 +63,55 @@ public class C_HeapMax {
                 if (p[0].equalsIgnoreCase("insert"))
                     heap.insert(Long.parseLong(p[1]));
                 i++;
-            //System.out.println(heap); //debug
             }
         }
+
         return maxValue;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream(root + "by/it/a_khmelov/lesson03/heapData.txt");
-        C_HeapMax instance = new C_HeapMax();
-        System.out.println("MAX="+instance.findMaxValue(stream));
-    }
+    private class MaxHeap {
+        private List<Long> heap = new ArrayList<>();
 
-    // РЕМАРКА. Это задание исключительно учебное.
-    // Свои собственные кучи нужны довольно редко.
-    // "В реальном бою" все существенно иначе. Изучите и используйте коллекции
-    // TreeSet, TreeMap, PriorityQueue и т.д. с нужным CompareTo() для объекта внутри.
+        int siftDown(int i) {
+            while (2 * i + 1 < heap.size()) {
+                int left = 2 * i + 1;
+                int right = 2 * i + 1;
+                int j = left;
+                if (right < heap.size() && heap.get(right) > heap.get(left))
+                    j = right;
+                if (heap.get(i) >= heap.get(j))
+                    break;
+                swap(i, j);
+                i = j;
+            }
+            return i;
+        }
+
+        private void swap(int aIndex, int bIndex) {
+            Long temp = heap.get(aIndex);
+            heap.set(aIndex, heap.get(bIndex));
+            heap.set(bIndex, temp);
+        }
+
+        int siftUp(int i) {
+            while (heap.get(i) > heap.get((i - 1) / 2)) {
+                swap(i, (i - 1) / 2);
+                i = (i - 1) / 2;
+            }
+            return i;
+        }
+
+        void insert(Long value) {
+            heap.add(value);
+            siftUp(heap.size() - 1);
+        }
+
+        Long extractMax() {
+            Long result = heap.get(0);
+            heap.set(0, heap.get(heap.size() - 1));
+            heap.remove(heap.size() - 1);
+            siftDown(0);
+            return result;
+        }
+    }
 }

@@ -1,4 +1,5 @@
-package by.it.a_khmelev.lesson04;
+package by.it.group473601.zaliyev.lesson04;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -27,46 +27,47 @@ import java.util.Scanner;
 */
 
 public class A_BinaryFind {
-    int[] findIndex(InputStream stream) throws FileNotFoundException {
-        //подготовка к чтению данных
-        Scanner scanner = new Scanner(stream);
-        //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
-
-        //размер отсортированного массива
-        int n = scanner.nextInt();
-        //сам отсортированный массива
-        int[] a=new int[n];
-        for (int i = 1; i <= n; i++) {
-            a[i-1] = scanner.nextInt();
-        }
-
-        //размер массива индексов
-        int k = scanner.nextInt();
-        int[] result=new int[k];
-        for (int i = 0; i < k; i++) {
-            int value = scanner.nextInt();
-            //тут реализуйте бинарный поиск индекса
-
-
-
-
-            result[i]=0;
-        }
-        //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
-        return result;
-    }
-
-
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream(root + "by/it/a_khmelov/lesson04/dataA.txt");
+        InputStream stream = new FileInputStream(root + "by\\it\\group473601\\zaliyev\\lesson04\\dataA.txt");
         A_BinaryFind instance = new A_BinaryFind();
-        //long startTime = System.currentTimeMillis();
-        int[] result=instance.findIndex(stream);
-        //long finishTime = System.currentTimeMillis();
-        for (int index:result){
-            System.out.print(index+" ");
+        int[] result = instance.findIndex(stream);
+        for (int index : result) {
+            System.out.print(index + " ");
         }
     }
 
+    int[] findIndex(InputStream stream) throws FileNotFoundException {
+        Scanner scanner = new Scanner(stream);
+        int dataCount = scanner.nextInt();
+        int[] dataSortArray = new int[dataCount];
+        for (int i = 1; i <= dataCount; i++) {
+            dataSortArray[i - 1] = scanner.nextInt();
+        }
+        int indexCount = scanner.nextInt();
+        int[] resultArray = new int[indexCount];
+        for (int i = 0; i < indexCount; i++) {
+            int valueForSearch = scanner.nextInt();
+            resultArray[i] = -1;
+            if (valueForSearch > dataSortArray[dataCount - 1] || valueForSearch < dataSortArray[0]) {
+                continue;
+            } else {
+                int start = 0;
+                int finish = dataCount;
+                int middle;
+                while (start < finish) {
+                    middle = (start + (finish - start) / 2);
+                    if (dataSortArray[middle] == valueForSearch) {
+                        resultArray[i] = middle + 1;
+                        break;
+                    } else if (dataSortArray[middle] > valueForSearch) {
+                        finish = middle;
+                    } else if (dataSortArray[middle] < valueForSearch) {
+                        start = middle + 1;
+                    }
+                }
+            }
+        }
+        return resultArray;
+    }
 }

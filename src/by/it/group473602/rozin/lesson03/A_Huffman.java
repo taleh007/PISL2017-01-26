@@ -173,9 +173,13 @@ public class A_Huffman {
         }
 
 
+<<<<<<< HEAD
 
 
         return sb.toString();
+=======
+   return sb.toString();
+>>>>>>> A_Huffman done
         //01001100100111
         //01001100100111
     }

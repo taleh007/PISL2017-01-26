@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
+
 /*
 В первой строке источника данных даны:
         - целое число 1<=n<=100000 (размер массива)
@@ -35,23 +37,36 @@ public class A_BinaryFind {
         //размер отсортированного массива
         int n = scanner.nextInt();
         //сам отсортированный массива
-        int[] a=new int[n];
+        int[] a = new int[n];
         for (int i = 1; i <= n; i++) {
-            a[i-1] = scanner.nextInt();
+            a[i - 1] = scanner.nextInt();
         }
+
 
         //размер массива индексов
         int k = scanner.nextInt();
-        int[] result=new int[k];
+        int[] result = new int[k];
+        int sizeResult = 0;
         for (int i = 0; i < k; i++) {
             int value = scanner.nextInt();
+            // System.out.println(value);
             //тут реализуйте бинарный поиск индекса
-
-
-
-
-            result[i]=0;
+            int leftIndex = 0;
+            int rightIndex = n - 1;
+            result[sizeResult] = -1;
+            while (leftIndex <= rightIndex) {
+                int mediumIndex = (leftIndex + rightIndex) / 2;
+                if (a[mediumIndex] == value) {
+                    result[sizeResult] = mediumIndex + 1;
+                    break;
+                } else if (a[mediumIndex] > value) {
+                    rightIndex = mediumIndex - 1;
+                } else leftIndex = mediumIndex + 1;
+            }
+            sizeResult++;
+            //result[i] = 0;
         }
+
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;
     }
@@ -59,13 +74,13 @@ public class A_BinaryFind {
 
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream(root + "by/it/a_khmelov/lesson04/dataA.txt");
+        InputStream stream = new FileInputStream(root + "by/it/group473602/rozin/lesson04/dataA.txt");
         A_BinaryFind instance = new A_BinaryFind();
         //long startTime = System.currentTimeMillis();
-        int[] result=instance.findIndex(stream);
+        int[] result = instance.findIndex(stream);
         //long finishTime = System.currentTimeMillis();
-        for (int index:result){
-            System.out.print(index+" ");
+        for (int index : result) {
+            System.out.print(index + " ");
         }
     }
 

@@ -2,7 +2,10 @@ package by.it.group473602.rozin.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 // Lesson 3. B_Huffman.
 // Восстановите строку по её коду и беспрефиксному коду символов.
@@ -43,7 +46,7 @@ import java.util.Scanner;
 public class B_Huffman {
 
     String decode(File file) throws FileNotFoundException {
-        StringBuilder result=new StringBuilder();
+        StringBuilder result = new StringBuilder();
         //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(file);
         Integer count = scanner.nextInt();
@@ -51,7 +54,27 @@ public class B_Huffman {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         //тут запишите ваше решение
 
+        Map<String, String> symbols = new HashMap<>();
 
+        String stringSymbols;
+        stringSymbols = scanner.nextLine();
+        for (int i = 0; i < count; i++) {
+            stringSymbols = scanner.nextLine();
+            String[] buf = stringSymbols.split(": ");
+            symbols.put(buf[1], buf[0]);
+
+        }
+        //System.out.println(symbols);
+
+        String text = scanner.nextLine();
+        String find = "";
+        for (char key : text.toCharArray()) {
+            find += key;
+            if (symbols.containsKey(find)) {
+                result.append(symbols.get(find));
+                find = "";
+            }
+        }
 
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -60,7 +83,7 @@ public class B_Huffman {
 
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
-        File f = new File(root + "by/it/a_khmelov/lesson03/encodeHuffman.txt");
+        File f = new File(root + "by/it/group473602/rozin/lesson03/encodeHuffman.txt");
         B_Huffman instance = new B_Huffman();
         String result = instance.decode(f);
         System.out.println(result);

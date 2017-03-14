@@ -3,6 +3,8 @@ package by.it.group473601.atamanchuk.lesson05;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /*
@@ -23,21 +25,41 @@ public class B_CountSort {
         Scanner scanner = new Scanner(stream);
         //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         //размер массива
-        int n = scanner.nextInt();
-        int[] points=new int[n];
+        int countElements = scanner.nextInt();
+        int maxNumber=10;
+        int[] inputSequence=new int[countElements];
 
         //читаем точки
-        for (int i = 0; i < n; i++) {
-            points[i]=scanner.nextInt();
+        for (int i = 0; i < countElements; i++) {
+            inputSequence[i]=scanner.nextInt();
         }
         //тут реализуйте логику задачи с применением сортировки подсчетом
 
+        int[] sortedSequence = new int[countElements];
+        int[] frequency = new int[maxNumber];
+
+        for(int i=0;i<maxNumber;i++){
+            frequency[i]=0;
+        }
+
+        for(int i=0;i<countElements;i++){
+            frequency[inputSequence[i]]++;
+        }
+
+        for(int j=1;j<maxNumber;j++){
+            frequency[j]=frequency[j]+frequency[j-1];
+        }
+
+        for(int i=countElements-1;i>=0;i--){
+            frequency[inputSequence[i]]--;
+            sortedSequence[frequency[inputSequence[i]]]=inputSequence[i];
+        }
 
 
 
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
-        return points;
+        return sortedSequence;
     }
 
 

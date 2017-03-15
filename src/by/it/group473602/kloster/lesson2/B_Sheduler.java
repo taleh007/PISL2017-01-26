@@ -1,6 +1,7 @@
 package by.it.group473602.kloster.lesson2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /*
 даны интервальные события events
@@ -26,6 +27,8 @@ public class B_Sheduler {
         public String toString() {
             return "("+ start +":" + stop + ")";
         }
+
+
     }
 
     public static void main(String[] args) {
@@ -43,13 +46,16 @@ public class B_Sheduler {
     }
 
     List<Event> calcStartTimes(Event[] events, int from, int to) {
-        //events - события которые нужно распределить в аудитории
-        //в период [from, int] (включительно).
-        //оптимизация проводится по наибольшему числу непересекающихся событий.
-        //начало и конец событий могут совпадать.
-        List<Event> result;
-        result = new ArrayList<>();
-        //ваше решение.
+        Arrays.sort(events, (o1, o2) -> (o1.stop-o2.stop));
+        List<Event> result = new ArrayList<>();
+        int start = from;
+        for(int i=0;i< events.length;i++) {
+            Event currentEvent = events[i];
+            if(currentEvent.start >= start && currentEvent.stop<=to){
+                start = currentEvent.stop;
+                result.add(currentEvent);
+            }
+        }
 
 
 

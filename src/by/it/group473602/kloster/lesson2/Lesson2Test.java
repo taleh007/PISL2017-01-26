@@ -44,8 +44,7 @@ public class Lesson2Test {
     }
     @Test
     public void C_GreedyKnapsack() throws Exception {
-        String root=System.getProperty("user.dir")+"/src/";
-        File f=new File(root+"by/it/a_khmelov/lesson02/greedyKnapsack.txt");
+        File f=new File("/mnt/3A8600878600463B/iCloud/Универ/3 курс/6 сем/ПИСЛ/PISL/PISL2017-01-26/src/by/it/group473602/kloster/lesson2/greedyKnapsack.txt");
         double costFinal=new C_GreedyKnapsack().calc(f);
         boolean ok=costFinal==200;
         assertTrue("B_Sheduler failed", ok);

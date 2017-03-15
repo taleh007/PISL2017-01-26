@@ -44,12 +44,33 @@ public class C_HeapMax {
         private List<Long> heap = new ArrayList<>();
 
         int siftDown(int i) { //просеивание вверх
+            while((2*i+1)<heap.size()){
+                int left=2*i+1;
+                int right=2*i+2;
+                int j=left;
+                if(right<heap.size() &&heap.get(right)<heap.get(left)){
+                    j=right;
+                }
+                if(heap.get(i)<=heap.get(right)){
+                    break;
+                }
+                long tmp = heap.get(i);
+                heap.add(i, heap.get(j));
+                heap.add(j, tmp);
+                i=j;
+            }
 
             return i;
         }
 
         int siftUp(int i) { //просеивание вниз
 
+            while(heap.get(i)<heap.get((i-1)/2)){
+                long tmp = heap.get(i);
+                heap.add(i, heap.get((i - 1) / 2));
+                heap.add((i - 1) / 2, tmp);
+                i=(i-1)/2;
+            }
             return i;
         }
 

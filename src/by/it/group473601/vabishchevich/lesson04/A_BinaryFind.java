@@ -35,22 +35,35 @@ public class A_BinaryFind {
         //размер отсортированного массива
         int n = scanner.nextInt();
         //сам отсортированный массива
+        int i=0;
+        int mid=0;
         int[] a=new int[n];
-        for (int i = 1; i <= n; i++) {
+        for ( i = 1; i <= n; i++) {
             a[i-1] = scanner.nextInt();
         }
-
         //размер массива индексов
         int k = scanner.nextInt();
         int[] result=new int[k];
-        for (int i = 0; i < k; i++) {
+        for ( i = 0; i < k; i++) {
+            int left = 0;
+            int right = n - 1;
+            result[i] = -1;
             int value = scanner.nextInt();
-            //тут реализуйте бинарный поиск индекса
-
-
-
-
-            result[i]=0;
+            while (left <= right) {
+                //тут реализуйте бинарный поиск индекса
+                System.out.print("f ");
+                mid = left + (right - left) / 2;
+                if (a[mid] == value) {
+                    result[i] = mid + 1;
+                    break;
+                } else {
+                    if (a[mid] < value) {
+                        right = mid;
+                    } else {
+                        left = mid + 1;
+                    }
+                }
+            }
         }
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;

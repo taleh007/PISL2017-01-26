@@ -44,13 +44,51 @@ public class C_LongNotUpSubSeq {
         //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         //общая длина последовательности
         int n = scanner.nextInt();
-        int[] m = new int[n];
+        int[] inputData = new int[n];
         //читаем всю последовательность
         for (int i = 0; i < n; i++) {
-            m[i] = scanner.nextInt();
+            inputData[i] = scanner.nextInt();
         }
         //тут реализуйте логику задачи методами динамического программирования (!!!)
         int result = 0;
+
+        int[] countSequency = new int[n];
+        int[] previousIndexOfElement = new int[n];
+
+        for(int i=0;i<n;i++){
+            countSequency[i]=1;
+            previousIndexOfElement[i]=-1;
+            for(int j=0;j<i;j++){
+                if(inputData[j]>=inputData[i]&&countSequency[j]+1>=countSequency[i]){
+                    countSequency[i]=countSequency[j]+1;
+                    previousIndexOfElement[i]=j;
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            if (result<countSequency[i]){
+                result=countSequency[i];
+            }
+        }
+
+        int[] countOfNVP = new int[result];
+        int k=1;
+        for(int i=1;i<n;i++){
+            if (countSequency[i]>countSequency[k]){
+                k=i;
+            }
+        }
+        int j=result-1;
+        while(k>=0){
+            countOfNVP[j]=k+1;
+            j--;
+            k=previousIndexOfElement[k];
+        }
+
+        for(int i=0;i<result;i++){
+            System.out.print(countOfNVP[i]+"\t");
+        }
+        System.out.println();
 
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!

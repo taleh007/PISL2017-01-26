@@ -45,10 +45,70 @@ public class C_QSortOptimized {
         @Override
         public int compareTo(Object o) {
             //подумайте, что должен возвращать компаратор отрезков
+            Segment obj = (Segment) o;
+            if (obj.start>=this.start){
+                return 1;
+            }
+            if (obj.start<this.start){
+                return -1;
+            }
             return 0;
         }
     }
 
+    public void quickSort(Segment[] segments,int left, int right){
+        Segment piv = segments[(left+right)/2];
+        int baseLeft= left;
+        int baseRight = right;
+        while(left<=right){
+            while(segments[left].compareTo(piv)==1){
+                left++;
+            }
+            while(segments[right].compareTo(piv)==-1){
+                right--;
+            }
+            if(left<=right){
+                Segment tmpObject = segments[left+1];
+                segments[left+1]=segments[right-1];
+                segments[right-1]=tmpObject;
+                left++;
+                right--;
+            }
+        }
+        if(baseLeft<right){
+            quickSort(segments,baseLeft,right);
+        }
+        if(baseRight>left){
+            quickSort(segments,left,baseRight);
+        }
+
+
+    }
+
+    public void binarySort(int[] result, Segment[] segments, int[] points){
+        for (int i = 0; i < points.length; i++) {
+            int lefIndex=0;
+            int rightIndex=segments.length-1;
+            while(lefIndex<=rightIndex) {
+                int middleIndex=(lefIndex+rightIndex)/2;
+                if(segments[middleIndex].start<=points[i]&&segments[middleIndex].stop>=points[i]){
+
+                    result[i]++;
+                    break;
+                }
+                else{
+                    if(segments[middleIndex].start<points[i]){
+
+                        rightIndex=middleIndex-1;
+                    }
+                    else{
+                        lefIndex=middleIndex+1;
+                    }
+                }
+            }
+
+        }
+    }
 
     int[] getAccessory2(InputStream stream) throws FileNotFoundException {
         //подготовка к чтению данных
@@ -59,9 +119,11 @@ public class C_QSortOptimized {
         Segment[] segments=new Segment[n];
         //число точек
         int m = scanner.nextInt();
-        int[] points=new int[m];
+        int[] points=new int[n];
         int[] result=new int[m];
-
+        for(int i=0;i<m;i++){
+            result[i]=0;
+        }
         //читаем сами отрезки
         for (int i = 0; i < n; i++) {
             //читаем начало и конец каждого отрезка
@@ -73,7 +135,9 @@ public class C_QSortOptimized {
         }
         //тут реализуйте логику задачи с применением быстрой сортировки
         //в классе отрезка Segment реализуйте нужный для этой задачи компаратор
+        quickSort(segments,0,segments.length-1);
 
+        binarySort(result,segments,points);
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;

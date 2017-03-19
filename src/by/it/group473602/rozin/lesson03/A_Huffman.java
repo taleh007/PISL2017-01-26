@@ -142,8 +142,7 @@ public class A_Huffman {
         }
 
 
-            //для каждого символа добавим 1 если его в карте еще нет или инкремент если есть.
-
+        //для каждого символа добавим 1 если его в карте еще нет или инкремент если есть.
 
 
         //3. вынимая по два узла из очереди (для сборки родителя)
@@ -152,12 +151,12 @@ public class A_Huffman {
         //У родителя частоты детей складываются.
 
 
-        while(priorityQueue.size()>1){
+        while (priorityQueue.size() > 1) {
             Node first = priorityQueue.poll();
             Node second = priorityQueue.poll();
 
 
-            Node parentNode = new InternalNode(first,second);
+            Node parentNode = new InternalNode(first, second);
             priorityQueue.add(parentNode);
         }
 
@@ -168,18 +167,13 @@ public class A_Huffman {
         Node root = priorityQueue.poll();
         root.fillCodes("");
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<s.length();i++){
+        for (int i = 0; i < s.length(); i++) {
             sb.append(codes.get(s.charAt(i)));
         }
 
-
-<<<<<<< HEAD
-
-
         return sb.toString();
-=======
-   return sb.toString();
->>>>>>> A_Huffman done
+
+
         //01001100100111
         //01001100100111
     }

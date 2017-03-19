@@ -51,15 +51,16 @@ public class A_BinaryFind {
             int value = scanner.nextInt();
             while (left <= right) {
                 //тут реализуйте бинарный поиск индекса
-                System.out.print("f ");
                 mid = left + (right - left) / 2;
                 if (a[mid] == value) {
                     result[i] = mid + 1;
                     break;
-                } else {
-                    if (a[mid] < value) {
-                        right = mid;
-                    } else {
+                }
+                else {
+                    if (a[mid] > value) {
+                        right = mid-1;
+                    }
+                    else {
                         left = mid + 1;
                     }
                 }

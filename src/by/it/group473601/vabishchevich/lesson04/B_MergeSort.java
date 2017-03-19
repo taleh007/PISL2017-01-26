@@ -22,34 +22,35 @@ Sample Output:
 public class B_MergeSort {
 
     int[] merge(int[] ar_1, int[] ar_2){
-        int max = ar_1.length + ar_2.length;
-        int[] result = new int[max];
-        int m = 0, n = 0;
-        for (int i = 0; i < max; i++){
-            if (m >= ar_1.length & n < ar_2.length){
-                result[i] = ar_2[n];
-                n++;
-            }else if(n >= ar_2.length & m < ar_1.length){
-                result[i] = ar_1[m];
-                m++;
-            }else if (ar_1[m] <= ar_2[n] & m < ar_1.length){
-                result[i] = ar_1[m];
-                m++;
-            }else {
-                result[i] = ar_2[n];
-                n++;
+        int len1=ar_1.length;
+        int len2=ar_2.length;
+        int maxLength = len1+len2;
+        int[] result = new int[maxLength];
+        int first = 0;
+        int second = 0;
+        for (int i = 0; i < maxLength; i++) {
+            if (second < len2 && first < len1) {
+                if (ar_1[first] > ar_2[second])
+                    result[i] = ar_2[second++];
+                else result[i] = ar_1[first++];
+            }
+            else if (second < len2) {
+            result[i]=ar_2[second++];
+            }
+            else{
+                result[i]=ar_1[first++];
             }
         }
-        return result;
+          return result;
     }
 
-    int[] mergeSort(int[] arr, int l, int r){
+    int[] mergeSort(int[] arr, int leftIndex, int rightIndex){
         int[] result = new int[1];
-        int index = (int)(l + r) / 2;
-        if (l < r){
-           return merge(mergeSort(arr, l, index), mergeSort(arr, index + 1, r));
+        int midIndex = (int)(leftIndex + rightIndex) / 2;
+        if (leftIndex < rightIndex){
+           return merge(mergeSort(arr, leftIndex, midIndex), mergeSort(arr, midIndex + 1, rightIndex));
         }else {
-            result[0] = arr[l];
+            result[0] = arr[leftIndex];
             return result;
         }
     }
